@@ -59,7 +59,11 @@ set ruler
 set laststatus=2
 
 "Copy words from other applications with p key
-set clipboard=unnamed
+if has('unnamedplus')
+    set clipboard=unnamedplus
+else
+    set clipboard=unnamed
+endif
 
 "Enable mouse control
 set mouse=a

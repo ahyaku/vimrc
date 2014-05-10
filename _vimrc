@@ -54,7 +54,11 @@ set cursorline
 "Highlight Searched Words
 set hlsearch
 "Copy words from other applications with p key
-set clipboard=unnamed
+if has('unnamedplus')
+    set clipboard=unnamed,unnamedplus
+else
+    set clipboard=unnamed
+endif
 "Do NOT save back up file
 set nobackup
 "Do NOT create swap file
@@ -1080,7 +1084,7 @@ function! MyFunc_SearchTargetAndSetToggledWord(toggle_comb_list, mode_inc_dec)
             "        true  *         true
             elseif l:col != 0
                 call setpos('.', l:cursor_pos_current)
-    
+   
                 "Exclude the word which includes the target words. e.g.) "truely", "is_true"
                 let [l:lnum, l:col] = searchpos('\<'.l:target.'\>', 'cen', line('.'))
                 if l:col >= l:cursor_pos_current[2]
