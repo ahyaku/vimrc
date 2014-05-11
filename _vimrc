@@ -59,6 +59,8 @@ if has('unnamedplus')
 else
     set clipboard=unnamed
 endif
+"Enable syntax highlight
+syntax on
 "Do NOT save back up file
 set nobackup
 "Do NOT create swap file

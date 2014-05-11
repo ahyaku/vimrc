@@ -68,6 +68,9 @@ endif
 "Enable mouse control
 set mouse=a
 
+"Enable syntax highlight
+syntax on
+
 "Font Size
 if has('win32') || has('win64')
   "For Windows
