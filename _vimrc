@@ -473,6 +473,18 @@ nnoremap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
 nnoremap <C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
 nnoremap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""
+"diffsplit settings
+"""""""""""""""""""""""""""""""""""""""""""""""""""
+if &diff
+"setup for diff mode
+    set foldopen=all
+else
+"   setup for non-diff mode
+    set foldopen&
+endif
+" Move to the next different point: "]c" 
+" Move to the previous different point: "[c" 
+"""""""""""""""""""""""""""""""""""""""""""""""""""
 "MiniBufferExplorer settings
 """""""""""""""""""""""""""""""""""""""""""""""""""
 "The width/height of miniBufExpl window is fixed.
