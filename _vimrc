@@ -538,6 +538,31 @@ if has('win32') || has('win64')
     call vimfiler#set_execute_file('jpg','C:\Program Files (x86)\IrfanView\i_view32.exe')
 else
 endif
+"Modify the behavior of jumping to alternate-file with <C-^>
+"After a file is opnend from VimFiler
+"not want to jump back to vimfiler window
+"but want to the previous file by <C-^>,
+autocmd! FileType vimfiler
+\ nmap <buffer> e 
+\ :let g:alt_buf_stock = MyFunc_KeepAltBufWithVimFiler()<CR>
+"Returns the previously opend file name to remember it
+"when some files are opend from "vimfiler.
+func! MyFunc_KeepAltBufWithVimFiler()
+    let l:alt_buf_crnt = expand('#:p')
+    exe "call vimfiler#mappings#do_switch_action(g:vimfiler_edit_action)"
+    return l:alt_buf_crnt
+endfunc
+"If current buffer is opend from vimfiler,
+"With <C-^>, previously opend buffer is opend.
+nnoremap <C-^> :call MyFunc_SwitchToAltBuf()<CR>
+func! MyFunc_SwitchToAltBuf()
+    let l:alt_buf_head = split(expand('#'), ':')
+    if l:alt_buf_head[0] == "vimfiler"
+        exe "e ".g:alt_buf_stock
+    else
+        exe "e #"
+    endif
+endfunc
 "call vimfiler#set_execute_file('jpg', 'hamana')
 "call vimfiler#set_execute_file('JPG', 'hamana')
 "call vimfiler#set_execute_file('exe', vimfiler_execute_system_associated)
@@ -1698,3 +1723,4 @@ command! Mygrep :Unite my_grep
 ":e ++enc=utf-8
 ":e ++enc=euc-jp
 ":e ++enc=shift_jis
+
