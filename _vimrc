@@ -54,7 +54,13 @@ set cursorline
 "Highlight Searched Words
 set hlsearch
 "Copy words from other applications with p key
-set clipboard=unnamed
+if has('unnamedplus')
+    set clipboard=unnamed,unnamedplus
+else
+    set clipboard=unnamed
+endif
+"Enable syntax highlight
+syntax on
 "Do NOT save back up file
 set nobackup
 "Do NOT create swap file
@@ -480,6 +486,18 @@ nnoremap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>
 nnoremap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
 nnoremap <C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
 nnoremap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
+"""""""""""""""""""""""""""""""""""""""""""""""""""
+"diffsplit settings
+"""""""""""""""""""""""""""""""""""""""""""""""""""
+if &diff
+"setup for diff mode
+    set foldopen=all
+else
+"   setup for non-diff mode
+    set foldopen&
+endif
+" Move to the next different point: "]c" 
+" Move to the previous different point: "[c" 
 """""""""""""""""""""""""""""""""""""""""""""""""""
 "MiniBufferExplorer settings
 """""""""""""""""""""""""""""""""""""""""""""""""""
@@ -1094,7 +1112,7 @@ function! MyFunc_SearchTargetAndSetToggledWord(toggle_comb_list, mode_inc_dec)
             "        true  *         true
             elseif l:col != 0
                 call setpos('.', l:cursor_pos_current)
-    
+   
                 "Exclude the word which includes the target words. e.g.) "truely", "is_true"
                 let [l:lnum, l:col] = searchpos('\<'.l:target.'\>', 'cen', line('.'))
                 if l:col >= l:cursor_pos_current[2]
