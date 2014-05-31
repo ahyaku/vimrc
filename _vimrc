@@ -380,6 +380,20 @@ else
 endif
 filetype plugin indent on
 """""""""""""""""""""""""""""""""""""""""""""""""""
+"undofile setting
+"""""""""""""""""""""""""""""""""""""""""""""""""""
+if has('win32') || has('win64')
+    let $VIM_BK_ROOT=$VIM
+else
+    let $VIM_BK_ROOT=$HOME
+endif
+let $VIM_BK='.vim_bk'
+if !isdirectory($VIM_BK_ROOT.'/'.$VIM_BK)
+    call mkdir($VIM_BK, $VIM_BK_ROOT)
+endif
+set undodir=$VIM_BK_ROOT/$VIM_BK
+set undofile
+"""""""""""""""""""""""""""""""""""""""""""""""""""
 "grep.vim settings
 """""""""""""""""""""""""""""""""""""""""""""""""""
 if has('win32') || has('win64')
