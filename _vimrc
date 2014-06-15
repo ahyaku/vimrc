@@ -36,11 +36,6 @@ set expandtab
 "if exists("did_load_filetypes")
 "  finish
 "endif
-augroup filetypedetect
-"  filetype indent off
-    au! BufRead,BufNewFile *.sh setlocal tabstop=2 softtabstop=0 shiftwidth=2
-"  filetype indent on
-augroup END
 "To check the filetype of the current buffer, run the following command.
 ":verbose :setlocal filetype?
 "Make new indent and current indent same
@@ -91,6 +86,8 @@ if has('win32') || has('win64')
   set guifont=MS_Gothic:h10:cSHIFTJIS
 else
 endif
+"Indent Setting for *.sh
+autocmd! FileType sh setlocal tabstop=2 softtabstop=0 shiftwidth=2
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "lightline Settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -570,6 +567,7 @@ endfunc
 "autocmd FileType vimfiler
 "        \ nnoremap <buffer><silent>/
 "        \ :<C-u>Unite file -default-action=vimfiler -start-insert<CR>
+let g:vimfiler_force_overwrite_statusline = 1
 """""""""""""""""""""""""""""""""""""""""""""""""""
 "VimShell settings
 """""""""""""""""""""""""""""""""""""""""""""""""""
@@ -924,6 +922,8 @@ let g:EasyMotion_do_shade = 0
 """""""""""""""""""""""""""""""""""""""""""""""""""
 "inoremap <buffer> <expr> = MySmartChar_CheckPrevWord() ? '=' : smartchr#loop(' = ', ' == ', '=')
 inoremap <expr> = MySmartChar_CheckPrevWord() ? '=' : smartchr#loop(' = ', ' == ', '=')
+"autocmd! FileType vim inoremap <expr> = MySmartChar_CheckPrevWord() ? '=' : smartchr#loop('=')
+
 "augroup SmartCharSetting
 "    autocmd!
 "    autocmd FileType *.c,*.cpp,*.h,*.py,*.mk,*.java inoremap <expr> = MySmartChar_CheckPrevWord() ? '=' : smartchr#loop(' = ', ' == ', '=')
@@ -1344,6 +1344,8 @@ endfunction
 """""""""""""""""""""""""""""""""""""""""""""""""""
 "DirDiff settings
 """""""""""""""""""""""""""""""""""""""""""""""""""
+"set nofoldenable
+"set foldcolumn = 0
 command! Ddiff :call MyFunc_DirDiff()
 func! MyFunc_DirDiff()
     let l:current_dir = getcwd()
@@ -1359,6 +1361,38 @@ func! MyFunc_DirDiff()
     echo "\r"
     exe "DirDiff " . l:fst_dir . " ". l:snd_dir
 endfunc
+autocmd! FileType vimfiler command! Ddiff :call MyFunc_DirDiffWithVimFiler()
+func! MyFunc_DirDiffWithVimFiler()
+    exe "wincmd w"
+    let l:marked_files = vimfiler#get_marked_files()
+    if len(l:marked_files) < 1
+        "echo "Select 2 directries or 2 files."
+        call MyFunc_DirDiff()
+        return
+    endif
+    let l:item_fst = l:marked_files[0]['action__path']
+    exe "wincmd w"
+    let l:marked_files = vimfiler#get_marked_files()
+    if len(l:marked_files) < 1
+        "echo "Select 2 directries or 2 files."
+        call MyFunc_DirDiff()
+        return
+    endif
+    let l:item_sec = l:marked_files[0]['action__path']
+    exe "normal \<Plug>(vimfiler_close)"
+    exe "DirDiff " . l:item_fst . " ". l:item_sec
+endfunc
+"autocmd! WinEnter * if &diff setlocal set nofoldenable
+"autocmd! WinEnter,WinLeave * :call MyFunc_Test()
+"func! MyFunc_Test()
+"    if &diff
+"        setlocal nofoldenable
+"    else
+"        setlocal foldenable
+"    endif
+"    "exe ":intro "
+"endfunc
+
 "set list
 "set nolist
 
