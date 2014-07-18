@@ -920,8 +920,7 @@ let g:EasyMotion_do_shade = 0
 """""""""""""""""""""""""""""""""""""""""""""""""""
 "SmartChar settings
 """""""""""""""""""""""""""""""""""""""""""""""""""
-"inoremap <buffer> <expr> = MySmartChar_CheckPrevWord() ? '=' : smartchr#loop(' = ', ' == ', '=')
-inoremap <expr> = MySmartChar_CheckPrevWord() ? '=' : smartchr#loop(' = ', ' == ', '=')
+inoremap <expr> = MySmartChar_CharEq()
 "autocmd! FileType vim inoremap <expr> = MySmartChar_CheckPrevWord() ? '=' : smartchr#loop('=')
 
 "augroup SmartCharSetting
@@ -929,10 +928,22 @@ inoremap <expr> = MySmartChar_CheckPrevWord() ? '=' : smartchr#loop(' = ', ' == 
 "    autocmd FileType *.c,*.cpp,*.h,*.py,*.mk,*.java inoremap <expr> = MySmartChar_CheckPrevWord() ? '=' : smartchr#loop(' = ', ' == ', '=')
 "    "autocmd FileType c,cpp,h,py,mk,java inoremap <buffer> <expr> = MySmartChar_CheckPrevWord() ? '=' : smartchr#loop(' = ', ' == ', '=')
 "augroup END
-" Returns 1 if the word left of current cursor position is one of the followings.
-" > < + - * / & | !
-func! MySmartChar_CheckPrevWord()
-    return search('\(>\|<\|+\|-\|*\|/\|&\||\|!\)\%#', 'bcn')? 1 : 0
+" Change the input behavior when '=' is input.
+" NOTE: '\%#' means the cursor position
+"       Refer to the help "pattern.txt" for the reference.
+func! MySmartChar_CharEq()
+    " '= '
+    if search('=\s\%#', 'bcn')
+        return smartchr#loop(' = ', '=', ' == ')
+    " > < + - * / & | ! 
+    elseif search('\(>\|<\|+\|-\|*\|/\|&\||\|!\)\%#', 'bcn')
+        return '='
+    " <Space>
+    elseif search('\s\%#', 'bcn') 
+        return '= '
+    else
+        return smartchr#loop(' = ', '=', ' == ')
+    endif
 endfunc
 "inoremap <buffer> <expr> , smartchr#loop(',', '->', '<-')
 "inoremap buffer> <expr> + smartchr#one_of('+', '+=', '++')
