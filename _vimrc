@@ -5,8 +5,8 @@ filetype off
 filetype on
 "Change Tab Switch
 if v:version>=700
-    nnoremap <C-Tab>   gt
-    nnoremap <C-S-Tab> gT
+  nnoremap <C-Tab>   gt
+  nnoremap <C-S-Tab> gT
 endif
 nnoremap <Space>th :tabfirst<CR>
 nnoremap <Space>tl :tablast<CR>
@@ -50,9 +50,9 @@ set cursorline
 set hlsearch
 "Copy words from other applications with p key
 if has('unnamedplus')
-    set clipboard=unnamed,unnamedplus
+  set clipboard=unnamed,unnamedplus
 else
-    set clipboard=unnamed
+  set clipboard=unnamed
 endif
 "Enable syntax highlight
 syntax on
@@ -77,7 +77,7 @@ set nrformats=hex
 set tags=tags;
 "Specify ctags to utilize Taglist correctly.
 if has('win32') || has('win64')
-    let Tlist_Ctags_Cmd = 'C:\ctags58\ctags.exe'
+  let Tlist_Ctags_Cmd = 'C:\ctags58\ctags.exe'
 else
 endif
 "Font Size
@@ -87,7 +87,7 @@ if has('win32') || has('win64')
 else
 endif
 "Indent Setting for *.sh
-autocmd! FileType sh setlocal tabstop=2 softtabstop=0 shiftwidth=2
+autocmd! FileType sh,vim setlocal tabstop=2 softtabstop=0 shiftwidth=2
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "lightline Settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -127,8 +127,8 @@ autocmd! FileType sh setlocal tabstop=2 softtabstop=0 shiftwidth=2
 "let g:lightline.colorscheme.mystatuslinecolor.palette = s:p
 
 let g:lightline = {
-     \ 'colorscheme': 'Tomorrow_Night_Blue',
-     \ }
+  \ 'colorscheme': 'Tomorrow_Night_Blue',
+  \ }
 "Change the color of the status line
 "augroup InsertHook
 "    autocmd!
@@ -142,13 +142,13 @@ nnoremap gj j
 nnoremap gk k
 "Settings for QuickFix Window
 augroup Quickfix
-    autocmd!
-    autocmd FileType qf nnoremap <silent><buffer> j j&
-    autocmd FileType qf nnoremap <silent><buffer> k k&
-    autocmd FileType qf nnoremap <silent><buffer> gj gj&
-    autocmd FileType qf nnoremap <silent><buffer> gk gk&
-    autocmd FileType qf nnoremap <silent><buffer> q :<C-u>ccl<CR>
-    "autocmd FileType qf nnoremap q :<C-u>ccl<CR>
+  autocmd!
+  autocmd FileType qf nnoremap <silent><buffer> j j&
+  autocmd FileType qf nnoremap <silent><buffer> k k&
+  autocmd FileType qf nnoremap <silent><buffer> gj gj&
+  autocmd FileType qf nnoremap <silent><buffer> gk gk&
+  autocmd FileType qf nnoremap <silent><buffer> q :<C-u>ccl<CR>
+  "autocmd FileType qf nnoremap q :<C-u>ccl<CR>
 augroup END
 "Replace ":" with ";" in Normal mode
 "nnoremap ; :
@@ -261,11 +261,11 @@ nnoremap <C-T><C-N>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 filetype plugin indent off
 if has('win32') || has('win64')
-    let $VIM_HOME="C:/vim74-kaoriya-win64"
-    set runtimepath&
-    set runtimepath^=$VIM_HOME
-    set runtimepath^=$VIM_HOME/.vim
-    set runtimepath^=$VIM_HOME/plugins/vimproc
+  let $VIM_HOME="C:/vim74-kaoriya-win64"
+  set runtimepath&
+  set runtimepath^=$VIM_HOME
+  set runtimepath^=$VIM_HOME/.vim
+  set runtimepath^=$VIM_HOME/plugins/vimproc
 "    set runtimepath^=$VIM_HOME/.vim/migemo
 "    set runtimepath^=$VIM_HOME/.vim/migemo/runtime/plugin
 "    set runtimepath^=$VIM_HOME/.vim/bundle/neobundle/vimproc
@@ -277,31 +277,31 @@ if has('win32') || has('win64')
     "Don't put the following 2 lines in "if has('vim_starting')".
     "Refer to this URL
     "https://github.com/Shougo/neobundle.vim/issues/19
-    set runtimepath+=$VIM/.vim/bundle/neobundle/neobundle.vim
+  set runtimepath+=$VIM/.vim/bundle/neobundle/neobundle.vim
 "    set runtimepath+=$VIM_HOME/.vim/colorscheme
     "set runtimepath^=$VIM_HOME/.vim/colorscheme
     "set C:\vim74-kaoriya-win64\.vim\colorscheme
-    call neobundle#rc(expand('$VIM/.vim/bundle/neobundle'))
+  call neobundle#rc(expand('$VIM/.vim/bundle/neobundle'))
 else
-    set runtimepath+=$HOME/.vim/bundle/neobundle
-    set runtimepath+=~/.vim/bundle/neobundle/neobundle.vim
-    "set runtimepath+=$VIM_HOME/.vim/colorscheme
-    "set runtimepath^=$VIM_HOME/.vim/colorscheme
-    " set runtimepath+=~/.vim/bundle/neobundle/neobundle.vim/autoload
-    " set runtimepath+=~/.vim/bundle/neobundle/neobundle.vim/doc
-    " set runtimepath+=~/.vim/bundle/neobundle/vimproc.vim
-    " set runtimepath+=~/.vim/bundle/neobundle/vimproc.vim/autoload
-    " set runtimepath+=~/.vim/bundle/neobundle/vimproc.vim/doc
-    " set runtimepath+=~/.vim/bundle/neobundle/vimshell.vim
-    " set runtimepath+=~/.vim/bundle/neobundle/vimshell.vim/autoload
-    " set runtimepath+=~/.vim/bundle/neobundle/vimshell.vim/doc
-    call neobundle#rc(expand('$HOME/.vim/bundle/neobundle'))
+  set runtimepath+=$HOME/.vim/bundle/neobundle
+  set runtimepath+=~/.vim/bundle/neobundle/neobundle.vim
+  "set runtimepath+=$VIM_HOME/.vim/colorscheme
+  "set runtimepath^=$VIM_HOME/.vim/colorscheme
+  " set runtimepath+=~/.vim/bundle/neobundle/neobundle.vim/autoload
+  " set runtimepath+=~/.vim/bundle/neobundle/neobundle.vim/doc
+  " set runtimepath+=~/.vim/bundle/neobundle/vimproc.vim
+  " set runtimepath+=~/.vim/bundle/neobundle/vimproc.vim/autoload
+  " set runtimepath+=~/.vim/bundle/neobundle/vimproc.vim/doc
+  " set runtimepath+=~/.vim/bundle/neobundle/vimshell.vim
+  " set runtimepath+=~/.vim/bundle/neobundle/vimshell.vim/autoload
+  " set runtimepath+=~/.vim/bundle/neobundle/vimshell.vim/doc
+  call neobundle#rc(expand('$HOME/.vim/bundle/neobundle'))
 endif
 set runtimepath^="C:/vim74-kaoriya-win64/hoge"
 
 "Status-Checking function to switch neocomplete (which requires lua) / neobundle.
 function! s:meet_neocomplete_requirements()
-    return has('lua') && (v:version > 703 || (v:version == 703 && has('patch885')))
+  return has('lua') && (v:version > 703 || (v:version == 703 && has('patch885')))
 endfunction
 "NeoBundle
 NeoBundle 'Shougo/neobundle.vim'
@@ -311,9 +311,9 @@ NeoBundle 'git://github.com/Shougo/vimfiler.git'
 "NeoBundle 'git://github.com/Shougo/vimproc.git'
 NeoBundle 'git://github.com/Shougo/vimshell.git'
 if s:meet_neocomplete_requirements()
-    NeoBundle 'Shougo/neocomplete.git'
+  NeoBundle 'Shougo/neocomplete.git'
 else
-    NeoBundle 'Shougo/neocomplcache.git'
+  NeoBundle 'Shougo/neocomplcache.git'
 endif
 NeoBundle 'Shougo/neosnippet.vim'
 NeoBundle 'Shougo/neosnippet-snippets'
@@ -366,33 +366,34 @@ NeoBundle 'tyru/eskk.vim'
 NeoBundle 'tyru/skkdict.vim'
 NeoBundle 'itchyny/lightline.vim'
 NeoBundle 'tpope/vim-abolish'
+NeoBundle 'haya14busa/vim-migemo'
 "NeoBundle 'koron/cmigemo'
 "Build vimproc automatically.
 if has('win32') || has('win64')
-    " NOT install vimproc via NeoBundle
-    " because it is included in Kaoriya Vim
+  " NOT install vimproc via NeoBundle
+  " because it is included in Kaoriya Vim
 else
-    NeoBundle 'Shougo/vimproc', {
-          \ 'build' : {
-          \     'windows' : 'make -f make_mingw64.mak',
-          \     'cygwin' : 'make -f make_cygwin.mak',
-          \     'mac' : 'make -f make_mac.mak',
-          \     'unix' : 'make -f make_unix.mak',
-          \    },
-          \ }
+  NeoBundle 'Shougo/vimproc', {
+        \ 'build' : {
+        \     'windows' : 'make -f make_mingw64.mak',
+        \     'cygwin' : 'make -f make_cygwin.mak',
+        \     'mac' : 'make -f make_mac.mak',
+        \     'unix' : 'make -f make_unix.mak',
+        \    },
+        \ }
 endif
 filetype plugin indent on
 """""""""""""""""""""""""""""""""""""""""""""""""""
 "undofile setting
 """""""""""""""""""""""""""""""""""""""""""""""""""
 if has('win32') || has('win64')
-    let $VIM_BK_ROOT=$VIM
+  let $VIM_BK_ROOT=$VIM
 else
-    let $VIM_BK_ROOT=$HOME
+  let $VIM_BK_ROOT=$HOME
 endif
 let $VIM_BK='.vim_bk'
 if !isdirectory($VIM_BK_ROOT.'/'.$VIM_BK)
-    call mkdir($VIM_BK, $VIM_BK_ROOT)
+  call mkdir($VIM_BK, $VIM_BK_ROOT)
 endif
 set undodir=$VIM_BK_ROOT/$VIM_BK
 set undofile
@@ -400,12 +401,12 @@ set undofile
 "grep.vim settings
 """""""""""""""""""""""""""""""""""""""""""""""""""
 if has('win32') || has('win64')
-    let MY_GREP_PATH_ROOT='C:\MinGW\msys\1.0\bin'
-    let Grep_Path=MY_GREP_PATH_ROOT.'\grep.exe'
-    let Fgrep_Path=MY_GREP_PATH_ROOT.'\grep.exe -F'
-    let Egrep_Path=MY_GREP_PATH_ROOT.'\grep.exe -E'
-    let Grep_Find_Path=MY_GREP_PATH_ROOT.'\find.exe'
-    let Grep_Xargs_Path=MY_GREP_PATH_ROOT.'\xargs.exe'
+  let MY_GREP_PATH_ROOT='C:\MinGW\msys\1.0\bin'
+  let Grep_Path=MY_GREP_PATH_ROOT.'\grep.exe'
+  let Fgrep_Path=MY_GREP_PATH_ROOT.'\grep.exe -F'
+  let Egrep_Path=MY_GREP_PATH_ROOT.'\grep.exe -E'
+  let Grep_Find_Path=MY_GREP_PATH_ROOT.'\find.exe'
+  let Grep_Xargs_Path=MY_GREP_PATH_ROOT.'\xargs.exe'
 else
 endif
 " Specify the Quotation Character.
@@ -417,63 +418,62 @@ let Grep_Default_Filelist='*.c *.cpp *.h *.mk *.py *.java *.txt'
 "cscope settings
 """""""""""""""""""""""""""""""""""""""""""""""""""
 if has("cscope")
-    if has('win32') || has('win64')
-         set csprg=C:/cscope/cscope.exe
-         "let Cscope_Path="C:/cscope/cscope.exe"
-         let Cscope_Path="C:\\cscope\\cscope.exe"
-    else
-         let Cscope_Path="/usr/bin/cscope"
-         "set csprg=/usr/local/bin/cscope
-    endif
-    set csto=0
-    set nocst
-    set nocsverb
-    " add any database in current directory
-    if filereadable("cscope.out")
-        cs add cscope.out
-    " else add database pointed to by environment
-    elseif $CSCOPE_DB != ""
-        cs add $CSCOPE_DB
-    endif
-    set csverb
+  if has('win32') || has('win64')
+       set csprg=C:/cscope/cscope.exe
+       "let Cscope_Path="C:/cscope/cscope.exe"
+       let Cscope_Path="C:\\cscope\\cscope.exe"
+  else
+       let Cscope_Path="/usr/bin/cscope"
+       "set csprg=/usr/local/bin/cscope
+  endif
+  set csto=0
+  set nocst
+  set nocsverb
+  " add any database in current directory
+  if filereadable("cscope.out")
+      cs add cscope.out
+  " else add database pointed to by environment
+  elseif $CSCOPE_DB != ""
+      cs add $CSCOPE_DB
+  endif
+  set csverb
 endif
 command! Cscope :call MyFunc_GenerateCscope(Cscope_Path)
 func! MyFunc_GenerateCscope(cscope)
-    "Create cscope.out file and connect to it.
-    let l:current_dir = getcwd()
-    let l:target_dir = input("Create cscope in which dir?: ", expand("%:p:h"), "file")
-    if l:target_dir == ""
-        return
-    endif
-    exe "cd " . l:target_dir
-    echo "\r"
-    set path&
-    let l:addit_flag = input("Add other dir? [y/n]: ")
-    if l:addit_flag == "y"
-        let l:addit_dir = input("Additional search dir path?: ", expand("%:p:h"), "file")
-        exe "!" . a:cscope . " -R -b -k -P " . l:target_dir . " -s ". l:addit_dir
-        "Register header file path to "path" for Jump to header file from include statement.
-        exec "set path+=" . l:target_dir . "/**"
-    elseif l:addit_flag == "n"
-        exe "!" . a:cscope . " -R -b -k -P " . l:target_dir
-        let l:addit_dir = ""
-        "Register header file path to "path" for Jump to header file from include statement.
-        exec "set path+=" . l:target_dir . "/**," . l:addit_dir . "/**"
-    else
-        return
-    endif
-    echo "\r"
+  "Create cscope.out file and connect to it.
+  let l:current_dir = getcwd()
+  let l:target_dir = input("Create cscope in which dir?: ", expand("%:p:h"), "file")
+  if l:target_dir == ""
+      return
+  endif
+  exe "cd " . l:target_dir
+  echo "\r"
+  set path&
+  let l:addit_flag = input("Add other dir? [y/n]: ")
+  if l:addit_flag == "y"
+      let l:addit_dir = input("Additional search dir path?: ", expand("%:p:h"), "file")
+      exe "!" . a:cscope . " -R -b -k -P " . l:target_dir . " -s ". l:addit_dir
+      "Register header file path to "path" for Jump to header file from include statement.
+      exec "set path+=" . l:target_dir . "/**"
+  elseif l:addit_flag == "n"
+      exe "!" . a:cscope . " -R -b -k -P " . l:target_dir
+      let l:addit_dir = ""
+      "Register header file path to "path" for Jump to header file from include statement.
+      exec "set path+=" . l:target_dir . "/**," . l:addit_dir . "/**"
+  else
+      return
+  endif
+  echo "\r"
 "    exe "!" . a:cscope . " -R -b -k"
 "    exe "!" . a:cscope . " -R -b -k -P " . l:target_dir . " -s ". l:addit_dir
 "    exe "!" . a:cscope . " -P " . l:target_dir
-    exe "cd " . l:current_dir
-    exe "cscope kill -1"
-    if has('win32') || has('win64')
-        exe "cscope add " . l:target_dir . "\\cscope.out " . l:target_dir
-    else
-        exe "cscope add " . l:target_dir . "/cscope.out " . l:target_dir
-    endif
-
+  exe "cd " . l:current_dir
+  exe "cscope kill -1"
+  if has('win32') || has('win64')
+      exe "cscope add " . l:target_dir . "\\cscope.out " . l:target_dir
+  else
+      exe "cscope add " . l:target_dir . "/cscope.out " . l:target_dir
+  endif
 endfunc
 nnoremap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>
 nnoremap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>
@@ -488,10 +488,10 @@ nnoremap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""
 if &diff
 "setup for diff mode
-    set foldopen=all
+  set foldopen=all
 else
 "   setup for non-diff mode
-    set foldopen&
+  set foldopen&
 endif
 " Move to the next different point: "]c" 
 " Move to the previous different point: "[c" 
@@ -523,16 +523,16 @@ nnoremap <silent><Space>fh. :VimFilerSplit -horizontal<CR>
 nnoremap <silent> <Space>f. :call MyVimFiler_OpenVimFilerExplorer()<CR>
 nnoremap <silent> <Space>fc. :VimFilerClose explorer<CR>
 func! MyVimFiler_OpenVimFilerExplorer()
-    execute "cd " . expand("%:p:h")
-    execute "VimFilerExplorer"
+  execute "cd " . expand("%:p:h")
+  execute "VimFilerExplorer"
 endfunc
 call vimfiler#set_execute_file('bmp,jpg,png,gif,pdf', 'open')
 call vimfiler#set_execute_file('txt','gvim')
 "call vimfiler#set_execute_file('txt','notepad')
 "call vimfiler#set_execute_file('txt','xyzzy')
 if has('win32') || has('win64')
-    "call vimfiler#set_execute_file('jpg','C:\Program Files (x86)\Hamana20060619\Hamana.exe')
-    call vimfiler#set_execute_file('jpg','C:\Program Files (x86)\IrfanView\i_view32.exe')
+  "call vimfiler#set_execute_file('jpg','C:\Program Files (x86)\Hamana20060619\Hamana.exe')
+  call vimfiler#set_execute_file('jpg','C:\Program Files (x86)\IrfanView\i_view32.exe')
 else
 endif
 "Modify the behavior of jumping to alternate-file with <C-^>
@@ -545,20 +545,20 @@ autocmd! FileType vimfiler
 "Returns the previously opend file name to remember it
 "when some files are opend from "vimfiler.
 func! MyFunc_KeepAltBufWithVimFiler()
-    let l:alt_buf_crnt = expand('#:p')
-    exe "call vimfiler#mappings#do_switch_action(g:vimfiler_edit_action)"
-    return l:alt_buf_crnt
+  let l:alt_buf_crnt = expand('#:p')
+  exe "call vimfiler#mappings#do_switch_action(g:vimfiler_edit_action)"
+  return l:alt_buf_crnt
 endfunc
 "If current buffer is opend from vimfiler,
 "With <C-^>, previously opend buffer is opend.
 nnoremap <C-^> :call MyFunc_SwitchToAltBuf()<CR>
 func! MyFunc_SwitchToAltBuf()
-    let l:alt_buf_head = split(expand('#'), ':')
-    if l:alt_buf_head[0] == "vimfiler"
-        exe "e ".g:alt_buf_stock
-    else
-        exe "e #"
-    endif
+  let l:alt_buf_head = split(expand('#'), ':')
+  if l:alt_buf_head[0] == "vimfiler"
+      exe "e ".g:alt_buf_stock
+  else
+      exe "e #"
+  endif
 endfunc
 "call vimfiler#set_execute_file('jpg', 'hamana')
 "call vimfiler#set_execute_file('JPG', 'hamana')
@@ -577,172 +577,172 @@ nnoremap <Space>sv :VimShell -split<CR>
 "Settings for neocomplete / neocomplcache (This settings are based on neocomplcache doc file)
 """""""""""""""""""""""""""""""""""""""""""""""""""
 if s:meet_neocomplete_requirements()
-    "Note: This option must set it in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
-    " Disable AutoComplPop.
-    let g:acp_enableAtStartup = 0
-    " Use neocomplete.
-    let g:neocomplete#enable_at_startup = 1
-    " Use smartcase.
-    let g:neocomplete#enable_smart_case = 1
-    " Set minimum syntax keyword length.
-    let g:neocomplete#sources#syntax#min_keyword_length = 3
-    let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+  "Note: This option must set it in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
+  " Disable AutoComplPop.
+  let g:acp_enableAtStartup = 0
+  " Use neocomplete.
+  let g:neocomplete#enable_at_startup = 1
+  " Use smartcase.
+  let g:neocomplete#enable_smart_case = 1
+  " Set minimum syntax keyword length.
+  let g:neocomplete#sources#syntax#min_keyword_length = 3
+  let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
 
-    " Define dictionary.
-    let g:neocomplete#sources#dictionary#dictionaries = {
-        \ 'default' : '',
-        \ 'vimshell' : $HOME.'/.vimshell_hist',
-        \ 'scheme' : $HOME.'/.gosh_completions'
-            \ }
+  " Define dictionary.
+  let g:neocomplete#sources#dictionary#dictionaries = {
+      \ 'default' : '',
+      \ 'vimshell' : $HOME.'/.vimshell_hist',
+      \ 'scheme' : $HOME.'/.gosh_completions'
+          \ }
 
-    " Define keyword.
-    if !exists('g:neocomplete#keyword_patterns')
-        let g:neocomplete#keyword_patterns = {}
-    endif
-    let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+  " Define keyword.
+  if !exists('g:neocomplete#keyword_patterns')
+      let g:neocomplete#keyword_patterns = {}
+  endif
+  let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 
-    " Plugin key-mappings.
-    inoremap <expr><C-g>     neocomplete#undo_completion()
-    inoremap <expr><C-l>     neocomplete#complete_common_string()
+  " Plugin key-mappings.
+  inoremap <expr><C-g>     neocomplete#undo_completion()
+  inoremap <expr><C-l>     neocomplete#complete_common_string()
 
-    " Recommended key-mappings.
-    " <CR>: close popup and save indent.
-    inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-    function! s:my_cr_function()
-      return neocomplete#close_popup() . "\<CR>"
-      " For no inserting <CR> key.
-      "return pumvisible() ? neocomplete#close_popup() : "\<CR>"
-    endfunction
-    " <TAB>: completion.
-    inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-    " <C-h>, <BS>: close popup and delete backword char.
-    inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-    inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-    inoremap <expr><C-y>  neocomplete#close_popup()
-    inoremap <expr><C-e>  neocomplete#cancel_popup()
-    " Close popup by <Space>.
-    "inoremap <expr><Space> pumvisible() ? neocomplete#close_popup() : "\<Space>"
+  " Recommended key-mappings.
+  " <CR>: close popup and save indent.
+  inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+  function! s:my_cr_function()
+    return neocomplete#close_popup() . "\<CR>"
+    " For no inserting <CR> key.
+    "return pumvisible() ? neocomplete#close_popup() : "\<CR>"
+  endfunction
+  " <TAB>: completion.
+  inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+  " <C-h>, <BS>: close popup and delete backword char.
+  inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+  inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+  inoremap <expr><C-y>  neocomplete#close_popup()
+  inoremap <expr><C-e>  neocomplete#cancel_popup()
+  " Close popup by <Space>.
+  "inoremap <expr><Space> pumvisible() ? neocomplete#close_popup() : "\<Space>"
 
-    " For cursor moving in insert mode(Not recommended)
-    "inoremap <expr><Left>  neocomplete#close_popup() . "\<Left>"
-    "inoremap <expr><Right> neocomplete#close_popup() . "\<Right>"
-    "inoremap <expr><Up>    neocomplete#close_popup() . "\<Up>"
-    "inoremap <expr><Down>  neocomplete#close_popup() . "\<Down>"
-    " Or set this.
-    "let g:neocomplete#enable_cursor_hold_i = 1
-    " Or set this.
-    "let g:neocomplete#enable_insert_char_pre = 1
+  " For cursor moving in insert mode(Not recommended)
+  "inoremap <expr><Left>  neocomplete#close_popup() . "\<Left>"
+  "inoremap <expr><Right> neocomplete#close_popup() . "\<Right>"
+  "inoremap <expr><Up>    neocomplete#close_popup() . "\<Up>"
+  "inoremap <expr><Down>  neocomplete#close_popup() . "\<Down>"
+  " Or set this.
+  "let g:neocomplete#enable_cursor_hold_i = 1
+  " Or set this.
+  "let g:neocomplete#enable_insert_char_pre = 1
 
-    " AutoComplPop like behavior.
-    "let g:neocomplete#enable_auto_select = 1
+  " AutoComplPop like behavior.
+  "let g:neocomplete#enable_auto_select = 1
 
-    " Shell like behavior(not recommended).
-    "set completeopt+=longest
-    "let g:neocomplete#enable_auto_select = 1
-    "let g:neocomplete#disable_auto_complete = 1
-    "inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
+  " Shell like behavior(not recommended).
+  "set completeopt+=longest
+  "let g:neocomplete#enable_auto_select = 1
+  "let g:neocomplete#disable_auto_complete = 1
+  "inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
 
-    " Enable omni completion.
-    autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-    autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-    autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-    autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-    autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+  " Enable omni completion.
+  autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+  autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+  autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+  autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+  autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
-    " Enable heavy omni completion.
-    if !exists('g:neocomplete#sources#omni#input_patterns')
-      let g:neocomplete#sources#omni#input_patterns = {}
-    endif
-    "let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-    "let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
-    "let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+  " Enable heavy omni completion.
+  if !exists('g:neocomplete#sources#omni#input_patterns')
+    let g:neocomplete#sources#omni#input_patterns = {}
+  endif
+  "let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+  "let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
+  "let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
 
-    " For perlomni.vim setting.
-    " https://github.com/c9s/perlomni.vim
-    let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
+  " For perlomni.vim setting.
+  " https://github.com/c9s/perlomni.vim
+  let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 else "s:meet_neocomplete_requirements()
-    let g:neocomplcache_enable_at_startup = 1
-    "Note: This option must set it in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
-    " Disable AutoComplPop.
-    let g:acp_enableAtStartup = 0
-    " Use neocomplcache.
-    let g:neocomplcache_enable_at_startup = 1
-    " Use smartcase.
-    let g:neocomplcache_enable_smart_case = 1
-    " Set minimum syntax keyword length.
-    let g:neocomplcache_min_syntax_length = 3
-    let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
-    " Enable heavy features.
-    " Use camel case completion.
-    "let g:neocomplcache_enable_camel_case_completion = 1
-    " Use underbar completion.
-    "let g:neocomplcache_enable_underbar_completion = 1
-    " Define dictionary.
-    let g:neocomplcache_dictionary_filetype_lists = {
-        \ 'default' : '',
-        \ 'vimshell' : $HOME.'/.vimshell_hist',
-        \ 'scheme' : $HOME.'/.gosh_completions'
-            \ }
-    " Define keyword.
-    if !exists('g:neocomplcache_keyword_patterns')
-        let g:neocomplcache_keyword_patterns = {}
-    endif
-    let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
-    " Plugin key-mappings.
-    inoremap <expr><C-g>     neocomplcache#undo_completion()
-    inoremap <expr><C-l>     neocomplcache#complete_common_string()
-    " Recommended key-mappings.
-    " <CR>: close popup and save indent.
-    inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-    function! s:my_cr_function()
-      return neocomplcache#smart_close_popup() . "\<CR>"
-      " For no inserting <CR> key.
-      "return pumvisible() ? neocomplcache#close_popup() : "\<CR>"
-    endfunction
-    " <TAB>: completion.
-    inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-    " <C-h>, <BS>: close popup and delete backword char.
-    inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
-    inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
-    inoremap <expr><C-y>  neocomplcache#close_popup()
-    inoremap <expr><C-e>  neocomplcache#cancel_popup()
-    " Close popup by <Space>.
-    "inoremap <expr><Space> pumvisible() ? neocomplcache#close_popup() : "\<Space>"
-    " For cursor moving in insert mode(Not recommended)
-    "inoremap <expr><Left>  neocomplcache#close_popup() . "\<Left>"
-    "inoremap <expr><Right> neocomplcache#close_popup() . "\<Right>"
-    "inoremap <expr><Up>    neocomplcache#close_popup() . "\<Up>"
-    "inoremap <expr><Down>  neocomplcache#close_popup() . "\<Down>"
-    " Or set this.
-    "let g:neocomplcache_enable_cursor_hold_i = 1
-    " Or set this.
-    "let g:neocomplcache_enable_insert_char_pre = 1
-    " AutoComplPop like behavior.
-    "let g:neocomplcache_enable_auto_select = 1
-    " Shell like behavior(not recommended).
-    "set completeopt+=longest
-    "let g:neocomplcache_enable_auto_select = 1
-    "let g:neocomplcache_disable_auto_complete = 1
-    "inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
-    " Enable omni completion.
-    augroup OmniCompletion
-        autocmd!
-        autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-        autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-        autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-        autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-        autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-    augroup END
-    " Enable heavy omni completion.
-    if !exists('g:neocomplcache_omni_patterns')
-      let g:neocomplcache_omni_patterns = {}
-    endif
-    let g:neocomplcache_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-    let g:neocomplcache_omni_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
-    let g:neocomplcache_omni_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
-    " For perlomni.vim setting.
-    " https://github.com/c9s/perlomni.vim
-    let g:neocomplcache_omni_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
+  let g:neocomplcache_enable_at_startup = 1
+  "Note: This option must set it in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
+  " Disable AutoComplPop.
+  let g:acp_enableAtStartup = 0
+  " Use neocomplcache.
+  let g:neocomplcache_enable_at_startup = 1
+  " Use smartcase.
+  let g:neocomplcache_enable_smart_case = 1
+  " Set minimum syntax keyword length.
+  let g:neocomplcache_min_syntax_length = 3
+  let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
+  " Enable heavy features.
+  " Use camel case completion.
+  "let g:neocomplcache_enable_camel_case_completion = 1
+  " Use underbar completion.
+  "let g:neocomplcache_enable_underbar_completion = 1
+  " Define dictionary.
+  let g:neocomplcache_dictionary_filetype_lists = {
+      \ 'default' : '',
+      \ 'vimshell' : $HOME.'/.vimshell_hist',
+      \ 'scheme' : $HOME.'/.gosh_completions'
+          \ }
+  " Define keyword.
+  if !exists('g:neocomplcache_keyword_patterns')
+      let g:neocomplcache_keyword_patterns = {}
+  endif
+  let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
+  " Plugin key-mappings.
+  inoremap <expr><C-g>     neocomplcache#undo_completion()
+  inoremap <expr><C-l>     neocomplcache#complete_common_string()
+  " Recommended key-mappings.
+  " <CR>: close popup and save indent.
+  inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+  function! s:my_cr_function()
+    return neocomplcache#smart_close_popup() . "\<CR>"
+    " For no inserting <CR> key.
+    "return pumvisible() ? neocomplcache#close_popup() : "\<CR>"
+  endfunction
+  " <TAB>: completion.
+  inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+  " <C-h>, <BS>: close popup and delete backword char.
+  inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
+  inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
+  inoremap <expr><C-y>  neocomplcache#close_popup()
+  inoremap <expr><C-e>  neocomplcache#cancel_popup()
+  " Close popup by <Space>.
+  "inoremap <expr><Space> pumvisible() ? neocomplcache#close_popup() : "\<Space>"
+  " For cursor moving in insert mode(Not recommended)
+  "inoremap <expr><Left>  neocomplcache#close_popup() . "\<Left>"
+  "inoremap <expr><Right> neocomplcache#close_popup() . "\<Right>"
+  "inoremap <expr><Up>    neocomplcache#close_popup() . "\<Up>"
+  "inoremap <expr><Down>  neocomplcache#close_popup() . "\<Down>"
+  " Or set this.
+  "let g:neocomplcache_enable_cursor_hold_i = 1
+  " Or set this.
+  "let g:neocomplcache_enable_insert_char_pre = 1
+  " AutoComplPop like behavior.
+  "let g:neocomplcache_enable_auto_select = 1
+  " Shell like behavior(not recommended).
+  "set completeopt+=longest
+  "let g:neocomplcache_enable_auto_select = 1
+  "let g:neocomplcache_disable_auto_complete = 1
+  "inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
+  " Enable omni completion.
+  augroup OmniCompletion
+      autocmd!
+      autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+      autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+      autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+      autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+      autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+  augroup END
+  " Enable heavy omni completion.
+  if !exists('g:neocomplcache_omni_patterns')
+    let g:neocomplcache_omni_patterns = {}
+  endif
+  let g:neocomplcache_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+  let g:neocomplcache_omni_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
+  let g:neocomplcache_omni_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+  " For perlomni.vim setting.
+  " https://github.com/c9s/perlomni.vim
+  let g:neocomplcache_omni_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 endif "s:meet_neocomplete_requirements()
 """""""""""""""""""""""""""""""""""""""""""""""""""
 "Settings neosnippet
@@ -832,18 +832,18 @@ else
     let AG_PATH ="/usr/local/bin/ag"
 endif
 if executable('ag')
-    "let g:unite_source_grep_command = 'ag'
-    let g:unite_source_grep_command = AG_PATH
-    let g:unite_source_grep_default_opts = '--nocolor --nogroup'
-    "let g:unite_source_grep_default_opts = '--nocolor --nogroup -G "(\.c$|\.txt$)"'
-    "let g:unite_source_grep_default_opts = '--nocolor --nogroup -G "(\.c$|\.h$|)"'
-    "let g:unite_source_grep_default_opts = '--nocolor --nogroup -G "(\.py$|\.txt$|)"'
-    "let g:unite_source_grep_default_opts = '--nocolor --nogroup -G "(\.py$|\.txt$|)"'
-    "let g:my_ag_enabled = 1
+  "let g:unite_source_grep_command = 'ag'
+  let g:unite_source_grep_command = AG_PATH
+  let g:unite_source_grep_default_opts = '--nocolor --nogroup'
+  "let g:unite_source_grep_default_opts = '--nocolor --nogroup -G "(\.c$|\.txt$)"'
+  "let g:unite_source_grep_default_opts = '--nocolor --nogroup -G "(\.c$|\.h$|)"'
+  "let g:unite_source_grep_default_opts = '--nocolor --nogroup -G "(\.py$|\.txt$|)"'
+  "let g:unite_source_grep_default_opts = '--nocolor --nogroup -G "(\.py$|\.txt$|)"'
+  "let g:my_ag_enabled = 1
 else
-    let g:unite_source_grep_command = Grep_Path
-    let g:unite_source_grep_default_opts = '-R -n'
-    "let g:my_ag_enabled = 0
+  let g:unite_source_grep_command = Grep_Path
+  let g:unite_source_grep_default_opts = '-R -n'
+  "let g:my_ag_enabled = 0
 endif
 let g:unite_source_grep_recursive_opt = ''
 let g:unite_source_grep_max_candidates = 200
@@ -854,16 +854,16 @@ let g:unite_enable_smart_case = 1
 """""""""""""""""""""""""""""""""""""""""""""""""""
 if has('win32') || has('win64')
 "     \     'path': "C:/vim74-kaoriya-win64/.vim/skk_dict/SKK-JISYO.L",
-    let g:eskk#large_dictionary = {
-    \     'path': $VIM_HOME . "/.vim/skk_dict/SKK-JISYO.L",
-    \     'sorted': 1,
-    \     'encoding': 'euc-jp',
-    \}
-    let g:eskk#dictionary = {
-    \     'path': $VIM_HOME . "/.vim/skk_dict/.my_skk-jisyo",
-    \     'sorted': 0,
-    \     'encoding': 'cp932',
-    \}
+  let g:eskk#large_dictionary = {
+  \     'path': $VIM_HOME . "/.vim/skk_dict/SKK-JISYO.L",
+  \     'sorted': 1,
+  \     'encoding': 'euc-jp',
+  \}
+  let g:eskk#dictionary = {
+  \     'path': $VIM_HOME . "/.vim/skk_dict/.my_skk-jisyo",
+  \     'sorted': 0,
+  \     'encoding': 'cp932',
+  \}
 else
 endif
 let g:eskk#enable_completion = 1
@@ -932,18 +932,18 @@ inoremap <expr> = MySmartChar_CharEq()
 " NOTE: '\%#' means the cursor position
 "       Refer to the help "pattern.txt" for the reference.
 func! MySmartChar_CharEq()
-    " '= '
-    if search('=\s\%#', 'bcn')
-        return smartchr#loop(' = ', '=', ' == ')
-    " > < + - * / & | ! 
-    elseif search('\(>\|<\|+\|-\|*\|/\|&\||\|!\)\%#', 'bcn')
-        return '='
-    " <Space>
-    elseif search('\s\%#', 'bcn') 
-        return '= '
-    else
-        return smartchr#loop(' = ', '=', ' == ')
-    endif
+  " '= '
+  if search('=\s\%#', 'bcn')
+      return smartchr#loop(' = ', '=', ' == ')
+  " > < + - * / & | ! 
+  elseif search('\(>\|<\|+\|-\|*\|/\|&\||\|!\)\%#', 'bcn')
+      return '='
+  " <Space>
+  elseif search('\s\%#', 'bcn') 
+      return '= '
+  else
+      return smartchr#loop(' = ', '=', ' == ')
+  endif
 endfunc
 "inoremap <buffer> <expr> , smartchr#loop(',', '->', '<-')
 "inoremap buffer> <expr> + smartchr#one_of('+', '+=', '++')
@@ -1060,8 +1060,8 @@ set statusline+=%L  "Total Line Number
 """""""""""""""""""""""""""""""""""""""""""""""""""
 let g:neosnippet#snippets_directory=$VIM_HOME."/.vim/mysnippets"
 func! ReturnLineNum()
-    echo line('.')
-    return line('.')
+  echo line('.')
+  return line('.')
 endfunc
 command! ReturnLineNum :call num = ReturnLineNum()
 """""""""""""""""""""""""""""""""""""""""""""""""""
@@ -1071,13 +1071,13 @@ command! ReturnLineNum :call num = ReturnLineNum()
 noremap <F1> :MyFuncToggleFullScreen<CR>
 let my_fullscreen_state=0
 func! MyFunc_ToggleFullScreen(state)
-    if a:state == 0
-        execute "simalt ~x"
-        return 1
-    else
-        execute "simalt ~r"
-        return 0
-    endif
+  if a:state == 0
+      execute "simalt ~x"
+      return 1
+  else
+      execute "simalt ~r"
+      return 0
+  endif
 endfunc
 command! MyFuncToggleFullScreen :let my_fullscreen_state = MyFunc_ToggleFullScreen(my_fullscreen_state)
 "Copy all to clipboard.
@@ -1099,12 +1099,12 @@ else
 endif
 command! Ctags :call MyFunc_GenerateCtags(Ctags_Path)
 func! MyFunc_GenerateCtags(ctags)
-    let l:current_dir = getcwd()
-    let l:target_dir = input("Create ctags in which dir?: ", expand("%:p:h"))
-    exe "cd " . l:target_dir
-    echo "\r"
-    exe "silent! !" . a:ctags . " -R ."
-    exe "cd " . l:current_dir
+  let l:current_dir = getcwd()
+  let l:target_dir = input("Create ctags in which dir?: ", expand("%:p:h"))
+  exe "cd " . l:target_dir
+  echo "\r"
+  exe "silent! !" . a:ctags . " -R ."
+  exe "cd " . l:current_dir
 endfunc
 nnoremap <C-Q><C-Q><C-K> <C-A>
 nnoremap <C-Q><C-Q><C-J> <C-X>
@@ -1114,121 +1114,120 @@ function! MyFunc_CompareValue(lhs, rhs)
 endfunction
 
 function! MyFunc_SearchTargetAndSetToggledWord(toggle_comb_list, mode_inc_dec)
-    let l:is_found = 0 " 0:Target not found, 1:Target found
-    let l:ret = [l:is_found, 0, 0, 0] "[is_found, target_word, toggled_word, column_position_of_target_word]
-    let l:found_list = [] "[[clumn_position_of_target_word, target_word, toggled_word], ....]
-    let l:col_list = []
+  let l:is_found = 0 " 0:Target not found, 1:Target found
+  let l:ret = [l:is_found, 0, 0, 0] "[is_found, target_word, toggled_word, column_position_of_target_word]
+  let l:found_list = [] "[[clumn_position_of_target_word, target_word, toggled_word], ....]
+  let l:col_list = []
 
-    "Move cursor to include the word under cursor to search region.
-    let l:cursor_pos_current = getpos('.')
-    let l:cursor_pos_tmp = l:cursor_pos_current[:]
+  "Move cursor to include the word under cursor to search region.
+  let l:cursor_pos_current = getpos('.')
+  let l:cursor_pos_tmp = l:cursor_pos_current[:]
 
-    "Move cursor back with "normal b" to include the word under cursor to for search area.
-    execute "normal b"
-    let l:cursor_pos_b = getpos('.')
-    "Prevent cursor from going back to the above line with "normal b" when cursor pos is the head of the current line.
-    if l:cursor_pos_tmp[1] != l:cursor_pos_b[1]
-        call setpos('.', l:cursor_pos_current)
-    endif
-
-    for l:target_comb in a:toggle_comb_list
-        let l:index = 0
-        for l:target in l:target_comb
-            let l:toggled_word = l:index+1 < len(target_comb) ? l:target_comb[l:index+1] : l:target_comb[0]
-
-            "Exclude the word which includes the target words. e.g.) "truely", "is_true"
-            let [l:lnum, l:col] = searchpos('\<'.l:target.'\>', 'cen', line('.'))
-            "Found target word located ahead of cursor.
-            if l:col >= l:cursor_pos_current[2]
-                call add(l:found_list, [l:col, l:target, l:toggled_word])
-                call add(l:col_list, l:col)
-            "If target word is found but its column value is less than cursor pos, earch again from the cursor position.
-            "e.g.) Thus it's possible to find the target "true" whose column value is bigger than cursor's one.
-            "       (Cursor position is *)
-            "        true  *         true
-            elseif l:col != 0
-                call setpos('.', l:cursor_pos_current)
-   
-                "Exclude the word which includes the target words. e.g.) "truely", "is_true"
-                let [l:lnum, l:col] = searchpos('\<'.l:target.'\>', 'cen', line('.'))
-                if l:col >= l:cursor_pos_current[2]
-                    call add(l:found_list, [l:col, l:target, l:toggled_word])
-                    call add(l:col_list, l:col)
-                endif
-            else
-                " Do Nothing.
-            endif
-            let l:index += 1
-        endfor
-    endfor
-
-    if l:col_list != []
-        let l:col_list = sort(l:col_list, "MyFunc_CompareValue")
-        "Which forward target word is the nearest one from cursor?
-        for l:elem in l:found_list
-            if l:elem[0] == l:col_list[0]
-                let l:is_found = 1
-                "return [l:is_found, l:elem[1], l:elem[2], l:elem[0]]
-                let l:ret = [l:is_found, l:elem[1], l:elem[2], l:elem[0]]
-            endif
-        endfor
-    endif
-
+  "Move cursor back with "normal b" to include the word under cursor to for search area.
+  execute "normal b"
+  let l:cursor_pos_b = getpos('.')
+  "Prevent cursor from going back to the above line with "normal b" when cursor pos is the head of the current line.
+  if l:cursor_pos_tmp[1] != l:cursor_pos_b[1]
     call setpos('.', l:cursor_pos_current)
-    "Search numbers
-    let l:val_pos = searchpos('\d', 'cen', line('.'))
-    if l:val_pos[1] != 0
-        if l:ret[3] == 0 || l:val_pos[1] < l:ret[3]
-            let l:is_found = 0
-            let l:ret[0] = l:is_found
-            if a:mode_inc_dec == '+'
-                "execute "normal \<C-A>"
-                "execute "normal \<Space>\<Space>\<C-K>"
-                execute "normal \<C-Q>\<C-Q>\<C-K>"
-            elseif a:mode_inc_dec == '-'
-                "execute "normal \<C-X>"
-                "execute "normal \<Space>\<Space>\<C-J>"
-                execute "normal \<C-Q>\<C-Q>\<C-J>"
-            else
-                "Do Nothing.
-            endif
-        endif
-    else
-        "Do Nothing
-    endif
+  endif
 
-    "echo "l:is_found = " . l:is_found
-    "return [l:is_found, 0, 0, 0]
-    return l:ret
+  for l:target_comb in a:toggle_comb_list
+    let l:index = 0
+    for l:target in l:target_comb
+      let l:toggled_word = l:index+1 < len(target_comb) ? l:target_comb[l:index+1] : l:target_comb[0]
+
+      "Exclude the word which includes the target words. e.g.) "truely", "is_true"
+      let [l:lnum, l:col] = searchpos('\<'.l:target.'\>', 'cen', line('.'))
+      "Found target word located ahead of cursor.
+      if l:col >= l:cursor_pos_current[2]
+        call add(l:found_list, [l:col, l:target, l:toggled_word])
+        call add(l:col_list, l:col)
+      "If target word is found but its column value is less than cursor pos, earch again from the cursor position.
+      "e.g.) Thus it's possible to find the target "true" whose column value is bigger than cursor's one.
+      "       (Cursor position is *)
+      "        true  *         true
+      elseif l:col != 0
+        call setpos('.', l:cursor_pos_current)
+ 
+        "Exclude the word which includes the target words. e.g.) "truely", "is_true"
+        let [l:lnum, l:col] = searchpos('\<'.l:target.'\>', 'cen', line('.'))
+        if l:col >= l:cursor_pos_current[2]
+            call add(l:found_list, [l:col, l:target, l:toggled_word])
+            call add(l:col_list, l:col)
+        endif
+      else
+        " Do Nothing.
+      endif
+      let l:index += 1
+    endfor
+  endfor
+
+  if l:col_list != []
+    let l:col_list = sort(l:col_list, "MyFunc_CompareValue")
+    "Which forward target word is the nearest one from cursor?
+    for l:elem in l:found_list
+      if l:elem[0] == l:col_list[0]
+        let l:is_found = 1
+        "return [l:is_found, l:elem[1], l:elem[2], l:elem[0]]
+        let l:ret = [l:is_found, l:elem[1], l:elem[2], l:elem[0]]
+      endif
+    endfor
+  endif
+
+  call setpos('.', l:cursor_pos_current)
+  "Search numbers
+  let l:val_pos = searchpos('\d', 'cen', line('.'))
+  if l:val_pos[1] != 0
+    if l:ret[3] == 0 || l:val_pos[1] < l:ret[3]
+      let l:is_found = 0
+      let l:ret[0] = l:is_found
+      if a:mode_inc_dec == '+'
+        "execute "normal \<C-A>"
+        "execute "normal \<Space>\<Space>\<C-K>"
+        execute "normal \<C-Q>\<C-Q>\<C-K>"
+      elseif a:mode_inc_dec == '-'
+        "execute "normal \<C-X>"
+        "execute "normal \<Space>\<Space>\<C-J>"
+        execute "normal \<C-Q>\<C-Q>\<C-J>"
+      else
+        "Do Nothing.
+      endif
+    endif
+  else
+    "Do Nothing
+  endif
+
+  "echo "l:is_found = " . l:is_found
+  "return [l:is_found, 0, 0, 0]
+  return l:ret
 endfunction
 
 func! MyFunc_ToggleWords(toggle_comb_list, mode_inc_dec)
-    let l:current_cursor_pos = getpos('.')
-    "let l:ret = MyFunc_SearchTargetAndSetToggledWord(a:toggle_comb_list)
-    let l:ret = MyFunc_SearchTargetAndSetToggledWord(a:toggle_comb_list, a:mode_inc_dec)
-    if l:ret[0] != 0
-        let l:target_pos = l:current_cursor_pos[:]
-        let l:target_pos[2] = l:ret[3]
-        let l:tmp_pos = l:target_pos[:]
-        call setpos('.', l:tmp_pos)
-        execute "normal ciw" . l:ret[2]
-    else
-        call setpos('.', l:current_cursor_pos)
-    endif
-    "echo "[target, toggled] = [" . l:ret[1] . ", " . l:ret[2]
-
-    return l:ret[0]
+  let l:current_cursor_pos = getpos('.')
+  "let l:ret = MyFunc_SearchTargetAndSetToggledWord(a:toggle_comb_list)
+  let l:ret = MyFunc_SearchTargetAndSetToggledWord(a:toggle_comb_list, a:mode_inc_dec)
+  if l:ret[0] != 0
+    let l:target_pos = l:current_cursor_pos[:]
+    let l:target_pos[2] = l:ret[3]
+    let l:tmp_pos = l:target_pos[:]
+    call setpos('.', l:tmp_pos)
+    execute "normal ciw" . l:ret[2]
+  else
+    call setpos('.', l:current_cursor_pos)
+  endif
+  "echo "[target, toggled] = [" . l:ret[1] . ", " . l:ret[2]
+  return l:ret[0]
 endfunc
 
 "Toggle combination which is consisits of the words including upper case
 "should be listed before the combination which is consists of the words which
 "is the same name but consists of only lower case
 let g:my_toggle_comb_list = [
-    \ ['Start', 'End'],
-    \ ['True', 'False'],
-    \ ['true', 'false'],
-    \ ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
-    \ ['hoge', 'geho']
+  \ ['Start', 'End'],
+  \ ['True', 'False'],
+  \ ['true', 'false'],
+  \ ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+  \ ['hoge', 'geho']
 \]
 "    \ ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'],
 nnoremap <C-A> :<C-U>call MyFunc_ToggleWords(g:my_toggle_comb_list, '+')<CR>
@@ -1237,8 +1236,8 @@ let FILE_PATH='C:/Program\ Files\ (x86)/xyzzy'
 let BROWSER_PATH='C:/PF/Opera/opera.exe'
 "nnoremap <F12> :<C-u>call system('gvim -c VimFilerDouble')<CR>
 func! MyFunc_TmpFunc()
-    execute ";"
-    "execute ':<C-R>"'
+  execute ";"
+  "execute ':<C-R>"'
 endfunc
 if has('win32') || has('win64')
     let help_path = 'C:/vim74-kaoriya-win64/vim74/doc'
@@ -1251,9 +1250,9 @@ let s:source_helplist = {
 let help_path = "C:/vim74-kaoriya-win64/plugins/vimdoc-ja/doc/"
 "nnoremap <F11> :<C-u>echo globpath(g:help_path, "*.jax")
 function! MyFunc_EchoHelpJax()
-    for l:e in split(globpath(g:help_path, "*.jax"), "\n")
-        echo l:e
-    endfor
+  for l:e in split(globpath(g:help_path, "*.jax"), "\n")
+    echo l:e
+  endfor
 endfunction
 "let s:source_helplist.default_action = {'file': 'above'}
 function! s:source_helplist.gather_candidates(args, context)
@@ -1324,33 +1323,33 @@ let AG_DEFAULT_FILELIST='\.c \.cpp \.h \.mk \.py \.java \.txt'
 "ToDo: Make it possible to search the word "command!"
 command! Agregrep :call MyFunc_RunAg(AG_PATH, AG_DEFAULT_FILELIST)
 function! MyFunc_RunAg(ag, file_list)
-    let l:current_dir = getcwd()
-    let l:target_word = input("What is the target word?: ", expand("<cword>"))
-    if l:target_word == ""
-        return
-    endif
-    let l:target_dir = input("Search recursively from which dir?: ", expand("%:p:h"), "file")
-    if l:target_dir == ""
-        return
-    endif
-    let l:target_pattern = input("What is the matching pattern?: ", a:file_list)
-    if l:target_pattern == ""
-        return
-    endif
-    let l:options = '-G "(' . substitute(l:target_pattern, ' ', '$|', 'g') . '$)"'
-    let l:ag_cmd = a:ag . " " . l:options . " -i " . l:target_word . " " . l:target_dir
-    echo "\r"
-    let l:cmd_output = system(ag_cmd)
-    execute "cd " . l:target_dir
-    let l:tmpfile = tempname()
-    execute "redir! > " . l:tmpfile
-        silent echon "Search results for pattern: " . l:target_word . "\n"
-        silent echo l:cmd_output
-    redir END
-    execute "cgetfile " . l:tmpfile
-    botright copen
-    execute "cd " . l:current_dir
-    call delete(l:tmpfile)
+  let l:current_dir = getcwd()
+  let l:target_word = input("What is the target word?: ", expand("<cword>"))
+  if l:target_word == ""
+    return
+  endif
+  let l:target_dir = input("Search recursively from which dir?: ", expand("%:p:h"), "file")
+  if l:target_dir == ""
+    return
+  endif
+  let l:target_pattern = input("What is the matching pattern?: ", a:file_list)
+  if l:target_pattern == ""
+    return
+  endif
+  let l:options = '-G "(' . substitute(l:target_pattern, ' ', '$|', 'g') . '$)"'
+  let l:ag_cmd = a:ag . " " . l:options . " -i " . l:target_word . " " . l:target_dir
+  echo "\r"
+  let l:cmd_output = system(ag_cmd)
+  execute "cd " . l:target_dir
+  let l:tmpfile = tempname()
+  execute "redir! > " . l:tmpfile
+    silent echon "Search results for pattern: " . l:target_word . "\n"
+    silent echo l:cmd_output
+  redir END
+  execute "cgetfile " . l:tmpfile
+  botright copen
+  execute "cd " . l:current_dir
+  call delete(l:tmpfile)
 endfunction
 """""""""""""""""""""""""""""""""""""""""""""""""""
 "DirDiff settings
@@ -1359,39 +1358,39 @@ endfunction
 "set foldcolumn = 0
 command! Ddiff :call MyFunc_DirDiff()
 func! MyFunc_DirDiff()
-    let l:current_dir = getcwd()
-    let l:fst_dir = input("First dir?: ", expand("%:p:h"), "file")
-    if l:fst_dir == ""
-        return
-    endif
-    echo "\r"
-    let l:snd_dir = input("Second dir?: ", l:fst_dir, "file")
-    if l:snd_dir == ""
-        return
-    endif
-    echo "\r"
-    exe "DirDiff " . l:fst_dir . " ". l:snd_dir
+  let l:current_dir = getcwd()
+  let l:fst_dir = input("First dir?: ", expand("%:p:h"), "file")
+  if l:fst_dir == ""
+    return
+  endif
+  echo "\r"
+  let l:snd_dir = input("Second dir?: ", l:fst_dir, "file")
+  if l:snd_dir == ""
+    return
+  endif
+  echo "\r"
+  exe "DirDiff " . l:fst_dir . " ". l:snd_dir
 endfunc
 autocmd! FileType vimfiler command! Ddiff :call MyFunc_DirDiffWithVimFiler()
 func! MyFunc_DirDiffWithVimFiler()
-    exe "wincmd w"
-    let l:marked_files = vimfiler#get_marked_files()
-    if len(l:marked_files) < 1
-        "echo "Select 2 directries or 2 files."
-        call MyFunc_DirDiff()
-        return
-    endif
-    let l:item_fst = l:marked_files[0]['action__path']
-    exe "wincmd w"
-    let l:marked_files = vimfiler#get_marked_files()
-    if len(l:marked_files) < 1
-        "echo "Select 2 directries or 2 files."
-        call MyFunc_DirDiff()
-        return
-    endif
-    let l:item_sec = l:marked_files[0]['action__path']
-    exe "normal \<Plug>(vimfiler_close)"
-    exe "DirDiff " . l:item_fst . " ". l:item_sec
+  exe "wincmd w"
+  let l:marked_files = vimfiler#get_marked_files()
+  if len(l:marked_files) < 1
+    "echo "Select 2 directries or 2 files."
+    call MyFunc_DirDiff()
+    return
+  endif
+  let l:item_fst = l:marked_files[0]['action__path']
+  exe "wincmd w"
+  let l:marked_files = vimfiler#get_marked_files()
+  if len(l:marked_files) < 1
+    "echo "Select 2 directries or 2 files."
+    call MyFunc_DirDiff()
+    return
+  endif
+  let l:item_sec = l:marked_files[0]['action__path']
+  exe "normal \<Plug>(vimfiler_close)"
+  exe "DirDiff " . l:item_fst . " ". l:item_sec
 endfunc
 "autocmd! WinEnter * if &diff setlocal set nofoldenable
 "autocmd! WinEnter,WinLeave * :call MyFunc_Test()
@@ -1424,17 +1423,17 @@ endfunc
 " Variables
 " Set from grepprg.
 call unite#util#set_default(
-      \ 'g:unite_source_grep_command', 'grep')
+    \ 'g:unite_source_grep_command', 'grep')
 call unite#util#set_default(
-      \ 'g:unite_source_grep_default_opts', '-inH')
+    \ 'g:unite_source_grep_default_opts', '-inH')
 
 call unite#util#set_default('g:unite_source_grep_recursive_opt', '-r')
 call unite#util#set_default('g:unite_source_grep_max_candidates', 100)
 call unite#util#set_default('g:unite_source_grep_search_word_highlight', 'Search')
 call unite#util#set_default('g:unite_source_grep_ignore_pattern',
-      \'\~$\|\.\%(o\|exe\|dll\|bak\|sw[po]\)$\|'.
-      \'\%(^\|/\)\.\%(hg\|git\|bzr\|svn\)\%($\|/\)\|'.
-      \'\%(^\|/\)tags\%(-\a*\)\?$')
+    \'\~$\|\.\%(o\|exe\|dll\|bak\|sw[po]\)$\|'.
+    \'\%(^\|/\)\.\%(hg\|git\|bzr\|svn\)\%($\|/\)\|'.
+    \'\%(^\|/\)tags\%(-\a*\)\?$')
 call unite#util#set_default('g:unite_source_grep_encoding', 'char')
 
 
@@ -1443,19 +1442,19 @@ call unite#util#set_default('g:unite_source_grep_encoding', 'char')
 "endfunction
 
 let s:source_my_grep = {
-      \ 'name': 'my_grep',
-      \ 'max_candidates': g:unite_source_grep_max_candidates,
-      \ 'hooks' : {},
-      \ 'syntax' : 'uniteSource__Grep',
-      \ 'matchers' : 'matcher_regexp',
-      \ 'ignore_pattern' : g:unite_source_grep_ignore_pattern,
-      \ 'variables' : {
-      \      'command' : g:unite_source_grep_command,
-      \      'default_opts' : g:unite_source_grep_default_opts,
-      \      'recursive_opt' : g:unite_source_grep_recursive_opt,
-      \      'search_word_highlight' : g:unite_source_grep_search_word_highlight,
-      \   },
-      \ }
+  \ 'name': 'my_grep',
+  \ 'max_candidates': g:unite_source_grep_max_candidates,
+  \ 'hooks' : {},
+  \ 'syntax' : 'uniteSource__Grep',
+  \ 'matchers' : 'matcher_regexp',
+  \ 'ignore_pattern' : g:unite_source_grep_ignore_pattern,
+  \ 'variables' : {
+  \      'command' : g:unite_source_grep_command,
+  \      'default_opts' : g:unite_source_grep_default_opts,
+  \      'recursive_opt' : g:unite_source_grep_recursive_opt,
+  \      'search_word_highlight' : g:unite_source_grep_search_word_highlight,
+  \   },
+  \ }
 
 call unite#define_source(s:source_my_grep)
 
