@@ -86,7 +86,14 @@ if has('win32') || has('win64')
   set guifont=MS_Gothic:h10:cSHIFTJIS
 else
 endif
-"Indent Setting for *.sh
+"fcitx Setting
+if has('win32') || has('win64')
+else
+  if executable('fcitx-remote')
+    autocmd! InsertLeave * call system('fcitx-remote -c')
+  endif
+endif
+"Indent Setting for *.shtem90
 autocmd! FileType sh,vim setlocal tabstop=2 softtabstop=0 shiftwidth=2
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "lightline Settings
