@@ -95,6 +95,7 @@ else
 endif
 "Indent Setting for *.shtem90
 autocmd! FileType sh,vim setlocal tabstop=2 softtabstop=0 shiftwidth=2
+autocmd! FileType hs setlocal tabstop=4 softtabstop=0 shiftwidth=4
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "lightline Settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -303,6 +304,9 @@ else
   " set runtimepath+=~/.vim/bundle/neobundle/vimshell.vim/autoload
   " set runtimepath+=~/.vim/bundle/neobundle/vimshell.vim/doc
   call neobundle#rc(expand('$HOME/.vim/bundle/neobundle'))
+  "For Haskell dev environment
+  set runtimepath+=~/.cabal/bin/
+  set runtimepath+=~/.cabal/
 endif
 set runtimepath^="C:/vim74-kaoriya-win64/hoge"
 
@@ -366,6 +370,19 @@ NeoBundle 'chazy/cscope_maps'
 "NeoBundle 'morhetz/gruvbox'
 "NeoBundle 'vim-scripts/moria'
 "NeoBundle 'vim-scripts/herald.vim'
+"For Haskell dev environment
+NeoBundle 'kana/vim-filetype-haskell'
+NeoBundle 'eagletmt/ghcmod-vim'
+NeoBundle 'eagletmt/neco-ghc'
+"For ref-hoogle "hoogle" is necessary.
+"Here is the installation example
+"$ cabal install hoogle
+"Usage: type 'K' on the target word in Normal mode.
+NeoBundle 'ujihisa/ref-hoogle'
+
+"NeoBundle 'eagletmt/vim-watchdogs'
+
+
 "Unite Sources
 NeoBundle 'Shougo/unite-outline'
 NeoBundle 'tsukkee/unite-help'
@@ -381,13 +398,13 @@ if has('win32') || has('win64')
   " because it is included in Kaoriya Vim
 else
   NeoBundle 'Shougo/vimproc', {
-        \ 'build' : {
-        \     'windows' : 'make -f make_mingw64.mak',
-        \     'cygwin' : 'make -f make_cygwin.mak',
-        \     'mac' : 'make -f make_mac.mak',
-        \     'unix' : 'make -f make_unix.mak',
-        \    },
-        \ }
+    \ 'build' : {
+    \     'windows' : 'make -f make_mingw64.mak',
+    \     'cygwin' : 'make -f make_cygwin.mak',
+    \     'mac' : 'make -f make_mac.mak',
+    \     'unix' : 'make -f make_unix.mak',
+    \    },
+    \ }
 endif
 filetype plugin indent on
 """""""""""""""""""""""""""""""""""""""""""""""""""
@@ -426,22 +443,22 @@ let Grep_Default_Filelist='*.c *.cpp *.h *.mk *.py *.java *.txt'
 """""""""""""""""""""""""""""""""""""""""""""""""""
 if has("cscope")
   if has('win32') || has('win64')
-       set csprg=C:/cscope/cscope.exe
-       "let Cscope_Path="C:/cscope/cscope.exe"
-       let Cscope_Path="C:\\cscope\\cscope.exe"
+    set csprg=C:/cscope/cscope.exe
+    "let Cscope_Path="C:/cscope/cscope.exe"
+    let Cscope_Path="C:\\cscope\\cscope.exe"
   else
-       let Cscope_Path="/usr/bin/cscope"
-       "set csprg=/usr/local/bin/cscope
+    let Cscope_Path="/usr/bin/cscope"
+    "set csprg=/usr/local/bin/cscope
   endif
   set csto=0
   set nocst
   set nocsverb
   " add any database in current directory
   if filereadable("cscope.out")
-      cs add cscope.out
+    cs add cscope.out
   " else add database pointed to by environment
   elseif $CSCOPE_DB != ""
-      cs add $CSCOPE_DB
+    cs add $CSCOPE_DB
   endif
   set csverb
 endif
@@ -451,35 +468,35 @@ func! MyFunc_GenerateCscope(cscope)
   let l:current_dir = getcwd()
   let l:target_dir = input("Create cscope in which dir?: ", expand("%:p:h"), "file")
   if l:target_dir == ""
-      return
+    return
   endif
   exe "cd " . l:target_dir
   echo "\r"
   set path&
   let l:addit_flag = input("Add other dir? [y/n]: ")
   if l:addit_flag == "y"
-      let l:addit_dir = input("Additional search dir path?: ", expand("%:p:h"), "file")
-      exe "!" . a:cscope . " -R -b -k -P " . l:target_dir . " -s ". l:addit_dir
-      "Register header file path to "path" for Jump to header file from include statement.
-      exec "set path+=" . l:target_dir . "/**"
-  elseif l:addit_flag == "n"
-      exe "!" . a:cscope . " -R -b -k -P " . l:target_dir
-      let l:addit_dir = ""
-      "Register header file path to "path" for Jump to header file from include statement.
-      exec "set path+=" . l:target_dir . "/**," . l:addit_dir . "/**"
-  else
-      return
+    let l:addit_dir = input("Additional search dir path?: ", expand("%:p:h"), "file")
+    exe "!" . a:cscope . " -R -b -k -P " . l:target_dir . " -s ". l:addit_dir
+    "Register header file path to "path" for Jump to header file from include statement.
+    exec "set path+=" . l:target_dir . "/**"
+  seif l:addit_flag == "n"
+    exe "!" . a:cscope . " -R -b -k -P " . l:target_dir
+    let l:addit_dir = ""
+    "Register header file path to "path" for Jump to header file from include statement.
+    exec "set path+=" . l:target_dir . "/**," . l:addit_dir . "/**"
+  se
+    return
   endif
   echo "\r"
-"    exe "!" . a:cscope . " -R -b -k"
-"    exe "!" . a:cscope . " -R -b -k -P " . l:target_dir . " -s ". l:addit_dir
-"    exe "!" . a:cscope . " -P " . l:target_dir
+"   exe "!" . a:cscope . " -R -b -k"
+"   exe "!" . a:cscope . " -R -b -k -P " . l:target_dir . " -s ". l:addit_dir
+"   exe "!" . a:cscope . " -P " . l:target_dir
   exe "cd " . l:current_dir
   exe "cscope kill -1"
   if has('win32') || has('win64')
-      exe "cscope add " . l:target_dir . "\\cscope.out " . l:target_dir
+    exe "cscope add " . l:target_dir . "\\cscope.out " . l:target_dir
   else
-      exe "cscope add " . l:target_dir . "/cscope.out " . l:target_dir
+    exe "cscope add " . l:target_dir . "/cscope.out " . l:target_dir
   endif
 endfunc
 nnoremap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>
@@ -562,9 +579,9 @@ nnoremap <C-^> :call MyFunc_SwitchToAltBuf()<CR>
 func! MyFunc_SwitchToAltBuf()
   let l:alt_buf_head = split(expand('#'), ':')
   if l:alt_buf_head[0] == "vimfiler"
-      exe "e ".g:alt_buf_stock
+    exe "e ".g:alt_buf_stock
   else
-      exe "e #"
+    exe "e #"
   endif
 endfunc
 "call vimfiler#set_execute_file('jpg', 'hamana')
@@ -597,14 +614,14 @@ if s:meet_neocomplete_requirements()
 
   " Define dictionary.
   let g:neocomplete#sources#dictionary#dictionaries = {
-      \ 'default' : '',
-      \ 'vimshell' : $HOME.'/.vimshell_hist',
-      \ 'scheme' : $HOME.'/.gosh_completions'
-          \ }
+    \ 'default' : '',
+    \ 'vimshell' : $HOME.'/.vimshell_hist',
+    \ 'scheme' : $HOME.'/.gosh_completions'
+        \ }
 
   " Define keyword.
   if !exists('g:neocomplete#keyword_patterns')
-      let g:neocomplete#keyword_patterns = {}
+    let g:neocomplete#keyword_patterns = {}
   endif
   let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 
@@ -686,13 +703,13 @@ else "s:meet_neocomplete_requirements()
   "let g:neocomplcache_enable_underbar_completion = 1
   " Define dictionary.
   let g:neocomplcache_dictionary_filetype_lists = {
-      \ 'default' : '',
-      \ 'vimshell' : $HOME.'/.vimshell_hist',
-      \ 'scheme' : $HOME.'/.gosh_completions'
-          \ }
+    \ 'default' : '',
+    \ 'vimshell' : $HOME.'/.vimshell_hist',
+    \ 'scheme' : $HOME.'/.gosh_completions'
+        \ }
   " Define keyword.
   if !exists('g:neocomplcache_keyword_patterns')
-      let g:neocomplcache_keyword_patterns = {}
+    let g:neocomplcache_keyword_patterns = {}
   endif
   let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
   " Plugin key-mappings.
@@ -733,12 +750,12 @@ else "s:meet_neocomplete_requirements()
   "inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
   " Enable omni completion.
   augroup OmniCompletion
-      autocmd!
-      autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-      autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-      autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-      autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-      autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+    autocmd!
+    autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+    autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+    autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+    autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+    autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
   augroup END
   " Enable heavy omni completion.
   if !exists('g:neocomplcache_omni_patterns')
@@ -832,11 +849,11 @@ call unite#custom#source('bookmark', 'sorters', 'sorter_word')
 "unite-grep settings
 nnoremap <silent><C-L><C-S> :Unite -auto-preview -no-quit -buffer-name=my_grep my_grep<CR>
 if has('win32') || has('win64')
-    let AG_PATH ="C:/MinGW/msys/1.0/bin/ag.exe"
+  let AG_PATH ="C:/MinGW/msys/1.0/bin/ag.exe"
 elseif has('mac')
-    let AG_PATH ="/opt/local/bin/ag"
+  let AG_PATH ="/opt/local/bin/ag"
 else
-    let AG_PATH ="/usr/local/bin/ag"
+  let AG_PATH ="/usr/local/bin/ag"
 endif
 if executable('ag')
   "let g:unite_source_grep_command = 'ag'
@@ -941,15 +958,15 @@ inoremap <expr> = MySmartChar_CharEq()
 func! MySmartChar_CharEq()
   " '= '
   if search('=\s\%#', 'bcn')
-      return smartchr#loop(' = ', '=', ' == ')
+    return smartchr#loop(' = ', '=', ' == ')
   " > < + - * / & | ! 
   elseif search('\(>\|<\|+\|-\|*\|/\|&\||\|!\)\%#', 'bcn')
-      return '='
+    return '='
   " <Space>
   elseif search('\s\%#', 'bcn') 
-      return '= '
+    return '= '
   else
-      return smartchr#loop(' = ', '=', ' == ')
+    return smartchr#loop(' = ', '=', ' == ')
   endif
 endfunc
 "inoremap <buffer> <expr> , smartchr#loop(',', '->', '<-')
@@ -987,7 +1004,22 @@ nnoremap <Bslash>c
 \           :cd %:p:h<CR>
 \           :let b:quickrun_config={'args':''}
 nnoremap <Space>r.
+\            :QuickRun<CR>
+augroup haskell
+  nnoremap <Space>r.
+  \            :QuickRun<CR>
+  \            :GhcModCheckAndLintAsync!<CR>
+augroup END
+nnoremap <Space>rr.
 \            :QuickRun -args ""
+"""""""""""""""""""""""""""""""""""""""""""""""""""
+"For Haskell dev environment
+"""""""""""""""""""""""""""""""""""""""""""""""""""
+augroup haskell
+  autocmd!
+  autocmd FileType haskell nnoremap <silent><buffer><Space>cc :<C-u>GhcModType!<CR>
+  autocmd FileType haskell nnoremap <silent><buffer><Space><Space>c :<C-u>GhcModTypeClear<CR>
+augroup END
 """""""""""""""""""""""""""""""""""""""""""""""""""
 "vim-ref settings
 """""""""""""""""""""""""""""""""""""""""""""""""""
