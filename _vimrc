@@ -391,6 +391,7 @@ NeoBundle 'tyru/skkdict.vim'
 NeoBundle 'itchyny/lightline.vim'
 NeoBundle 'tpope/vim-abolish'
 NeoBundle 'haya14busa/vim-migemo'
+NeoBundle 'thinca/vim-unite-history'
 "NeoBundle 'koron/cmigemo'
 "Build vimproc automatically.
 if has('win32') || has('win64')
@@ -808,6 +809,10 @@ nnoremap <C-L><C-M> :<C-u>Unite bookmark -default-action=vimfiler<CR>
 nnoremap <C-L><C-A> :<C-u>Unite file buffer file_mru -buffer-name=all -start-insert<CR>
 let g:unite_source_history_yank_enable = 1
 nnoremap <C-L><C-P> :<C-u>Unite history/yank<CR>
+"nnoremap <C-L><C-C> :<C-u>Unite history/command -direction=botright -start-insert -default-action=edit<CR>
+nnoremap <C-L><C-C> :<C-u>Unite history/command -direction=botright -start-insert<CR>
+nnoremap <C-C>      :<C-u>Unite history/command -direction=botright -start-insert<CR>
+"nnoremap <C-L><C-S> :<C-u>Unite history/search -direction=botright -start-insert<CR>
 "nnoremap <C-L><C-L> :Unite line<CR>
 "nnoremap <C-L><C-L> :call unite#start(['line'], {'source__direction' : 'all'})<CR>
 "nnoremap <C-L><C-L> :call unite#start(['line'], {'source__direction' : 'backward'})<CR>
@@ -1005,13 +1010,17 @@ nnoremap <Bslash>c
 \           :let b:quickrun_config={'args':''}
 nnoremap <Space>r.
 \            :QuickRun<CR>
+nnoremap <Space>rr.
+\            :QuickRun -args ""
 augroup haskell
   nnoremap <Space>r.
   \            :QuickRun<CR>
   \            :GhcModCheckAndLintAsync!<CR>
+
+"  nnoremap <Space>rr.
+"  \            :QuickRun -args ""
+"  \            :GhcModCheckAndLintAsync!<CR>
 augroup END
-nnoremap <Space>rr.
-\            :QuickRun -args ""
 """""""""""""""""""""""""""""""""""""""""""""""""""
 "For Haskell dev environment
 """""""""""""""""""""""""""""""""""""""""""""""""""
