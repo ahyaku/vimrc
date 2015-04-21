@@ -289,7 +289,8 @@ if has('win32') || has('win64')
 "    set runtimepath+=$VIM_HOME/.vim/colorscheme
     "set runtimepath^=$VIM_HOME/.vim/colorscheme
     "set C:\vim74-kaoriya-win64\.vim\colorscheme
-  call neobundle#rc(expand('$VIM/.vim/bundle/neobundle'))
+  call neobundle#begin(expand('$VIM/.vim/bundle/neobundle'))
+  call neobundle#end()
 else
   set runtimepath+=$HOME/.vim/bundle/neobundle
   set runtimepath+=~/.vim/bundle/neobundle/neobundle.vim
@@ -303,7 +304,8 @@ else
   " set runtimepath+=~/.vim/bundle/neobundle/vimshell.vim
   " set runtimepath+=~/.vim/bundle/neobundle/vimshell.vim/autoload
   " set runtimepath+=~/.vim/bundle/neobundle/vimshell.vim/doc
-  call neobundle#rc(expand('$HOME/.vim/bundle/neobundle'))
+  call neobundle#begin(expand('$HOME/.vim/bundle/neobundle'))
+  call neobundle#end()
   "For Haskell dev environment
   set runtimepath+=~/.cabal/bin/
   set runtimepath+=~/.cabal/
@@ -380,6 +382,9 @@ NeoBundle 'eagletmt/neco-ghc'
 "Usage: type 'K' on the target word in Normal mode.
 NeoBundle 'ujihisa/ref-hoogle'
 
+"NeoBundle 'godlygeek/csapprox'
+NeoBundle 'vim-jp/vim-cpp'
+
 "NeoBundle 'eagletmt/vim-watchdogs'
 
 
@@ -426,7 +431,7 @@ set undofile
 "grep.vim settings
 """""""""""""""""""""""""""""""""""""""""""""""""""
 if has('win32') || has('win64')
-  let MY_GREP_PATH_ROOT='C:\MinGW\msys\1.0\bin'
+  let MY_GREP_PATH_ROOT='C:\msys\bin'
   let Grep_Path=MY_GREP_PATH_ROOT.'\grep.exe'
   let Fgrep_Path=MY_GREP_PATH_ROOT.'\grep.exe -F'
   let Egrep_Path=MY_GREP_PATH_ROOT.'\grep.exe -E'
@@ -480,12 +485,12 @@ func! MyFunc_GenerateCscope(cscope)
     exe "!" . a:cscope . " -R -b -k -P " . l:target_dir . " -s ". l:addit_dir
     "Register header file path to "path" for Jump to header file from include statement.
     exec "set path+=" . l:target_dir . "/**"
-  seif l:addit_flag == "n"
+  elseif l:addit_flag == "n"
     exe "!" . a:cscope . " -R -b -k -P " . l:target_dir
     let l:addit_dir = ""
     "Register header file path to "path" for Jump to header file from include statement.
     exec "set path+=" . l:target_dir . "/**," . l:addit_dir . "/**"
-  se
+  else
     return
   endif
   echo "\r"
@@ -794,13 +799,13 @@ endif
 "Unite settings
 """""""""""""""""""""""""""""""""""""""""""""""""""
 "Ignore case in search patterns (e.g. "A" and "a")
-call unite#set_profile('default', 'ignorecase', 1)
-call unite#set_profile('files', 'ignorecase', 1)
-call unite#set_profile('bookmark', 'ignorecase', 1)
+call unite#custom#profile('default', 'context', {'ignorecase': 1})
+call unite#custom#profile('files', 'context', {'ignorecase': 1})
+call unite#custom#profile('bookmark', 'context', {'ignorecase': 1})
 "Recognize the difference btw upper/lower cases if target string contains upper case
-call unite#set_profile('default', 'smartcase', 1)
-call unite#set_profile('files', 'smartcase', 1)
-call unite#set_profile('bookmark', 'smartcase', 1)
+call unite#custom#profile('default', 'context', {'smartcase': 1})
+call unite#custom#profile('files', 'context', {'smartcase': 1})
+call unite#custom#profile('bookmark', 'context', {'smartcase': 1})
 "Open list of buffers which are opened in the current tab.
 nnoremap <C-L><C-B> :<C-u>Unite buffer_tab<CR>
 nnoremap <C-L><C-F> :<C-u>Unite file -buffer-name=files -start-insert<CR>
@@ -809,9 +814,7 @@ nnoremap <C-L><C-M> :<C-u>Unite bookmark -default-action=vimfiler<CR>
 nnoremap <C-L><C-A> :<C-u>Unite file buffer file_mru -buffer-name=all -start-insert<CR>
 let g:unite_source_history_yank_enable = 1
 nnoremap <C-L><C-P> :<C-u>Unite history/yank<CR>
-"nnoremap <C-L><C-C> :<C-u>Unite history/command -direction=botright -start-insert -default-action=edit<CR>
-nnoremap <C-L><C-C> :<C-u>Unite history/command -direction=botright -start-insert<CR>
-nnoremap <C-C>      :<C-u>Unite history/command -direction=botright -start-insert<CR>
+nnoremap <C-L><C-K> :<C-u>Unite history/command -direction=botright -start-insert<CR>
 "nnoremap <C-L><C-S> :<C-u>Unite history/search -direction=botright -start-insert<CR>
 "nnoremap <C-L><C-L> :Unite line<CR>
 "nnoremap <C-L><C-L> :call unite#start(['line'], {'source__direction' : 'all'})<CR>
@@ -1808,6 +1811,16 @@ endfunction
 " vim: foldmethod=marker
 
 command! Mygrep :Unite my_grep
+
+"With ":highlight" command, check the current colorscheme setting.
+hi Normal ctermbg=black
+hi CursorLine cterm=NONE ctermbg=darkblue
+hi Underlined cterm=NONE ctermfg=11
+"hi Underlined cterm=NONE ctermfg=darkcyan
+hi Constant cterm=NONE ctermbg=0 ctermfg=11
+hi Special cterm=NONE ctermbg=0 ctermfg=11
+hi Comment cterm=NONE ctermbg=0 ctermfg=darkcyan
+hi PreProc cterm=NONE ctermfg=cyan
 
 "Memo: How to convert file formats on Vim
 "http://advweb.seesaa.net/article/3074705.html
