@@ -289,8 +289,8 @@ if has('win32') || has('win64')
 "    set runtimepath+=$VIM_HOME/.vim/colorscheme
     "set runtimepath^=$VIM_HOME/.vim/colorscheme
     "set C:\vim74-kaoriya-win64\.vim\colorscheme
-  call neobundle#begin(expand('$VIM/.vim/bundle/neobundle'))
-  call neobundle#end()
+
+  let $PATH_NBDL=expand('$VIM/.vim/bundle/neobundle')
 else
   set runtimepath+=$HOME/.vim/bundle/neobundle
   set runtimepath+=~/.vim/bundle/neobundle/neobundle.vim
@@ -304,8 +304,7 @@ else
   " set runtimepath+=~/.vim/bundle/neobundle/vimshell.vim
   " set runtimepath+=~/.vim/bundle/neobundle/vimshell.vim/autoload
   " set runtimepath+=~/.vim/bundle/neobundle/vimshell.vim/doc
-  call neobundle#begin(expand('$HOME/.vim/bundle/neobundle'))
-  call neobundle#end()
+  let $PATH_NBDL=expand('$VIM/.vim/bundle/neobundle')
   "For Haskell dev environment
   set runtimepath+=~/.cabal/bin/
   set runtimepath+=~/.cabal/
@@ -317,6 +316,7 @@ function! s:meet_neocomplete_requirements()
   return has('lua') && (v:version > 703 || (v:version == 703 && has('patch885')))
 endfunction
 "NeoBundle
+call neobundle#begin(expand('$PATH_NBDL'))
 NeoBundle 'Shougo/neobundle.vim'
 NeoBundle 'git://github.com/Shougo/unite.vim.git'
 NeoBundle 'Shougo/neomru.vim'
@@ -412,6 +412,7 @@ else
     \    },
     \ }
 endif
+call neobundle#end()
 filetype plugin indent on
 """""""""""""""""""""""""""""""""""""""""""""""""""
 "undofile setting
