@@ -1,5 +1,7 @@
 "Auto encode detection.
-set fileencodings=iso-2022jp,cp932,sjis,euc-jp,utf-8
+"set fileencodings=utf-8,iso-2022jp,cp932,sjis,euc-jp
+set fileencodings=utf-8,iso-2022jp,sjis,euc-jp
+set fileformats=unix,dos
 "Enable filetype option.
 filetype off
 filetype on
@@ -290,7 +292,7 @@ if has('win32') || has('win64')
     "set runtimepath^=$VIM_HOME/.vim/colorscheme
     "set C:\vim74-kaoriya-win64\.vim\colorscheme
 
-  let $PATH_NBDL=expand('$VIM/.vim/bundle/neobundle')
+  let $PATH_NBDL=expand($VIM.'/.vim/bundle/neobundle')
 else
   set runtimepath+=$HOME/.vim/bundle/neobundle
   set runtimepath+=~/.vim/bundle/neobundle/neobundle.vim
@@ -304,7 +306,7 @@ else
   " set runtimepath+=~/.vim/bundle/neobundle/vimshell.vim
   " set runtimepath+=~/.vim/bundle/neobundle/vimshell.vim/autoload
   " set runtimepath+=~/.vim/bundle/neobundle/vimshell.vim/doc
-  let $PATH_NBDL=expand('$VIM/.vim/bundle/neobundle')
+  let $PATH_NBDL=expand($VIM.'/.vim/bundle/neobundle')
   "For Haskell dev environment
   set runtimepath+=~/.cabal/bin/
   set runtimepath+=~/.cabal/
@@ -316,25 +318,27 @@ function! s:meet_neocomplete_requirements()
   return has('lua') && (v:version > 703 || (v:version == 703 && has('patch885')))
 endfunction
 "NeoBundle
-call neobundle#begin(expand('$PATH_NBDL'))
+call neobundle#begin(expand($PATH_NBDL))
 NeoBundle 'Shougo/neobundle.vim'
-NeoBundle 'git://github.com/Shougo/unite.vim.git'
+NeoBundle 'vim-jp/vital.vim'
+NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/neomru.vim'
-NeoBundle 'git://github.com/Shougo/vimfiler.git'
+NeoBundle 'Shougo/vimfiler'
 "NeoBundle 'git://github.com/Shougo/vimproc.git'
-NeoBundle 'git://github.com/Shougo/vimshell.git'
+NeoBundle 'Shougo/vimshell'
 if s:meet_neocomplete_requirements()
-  NeoBundle 'Shougo/neocomplete.git'
+  NeoBundle 'Shougo/neocomplete'
 else
-  NeoBundle 'Shougo/neocomplcache.git'
+  NeoBundle 'Shougo/neocomplcache'
 endif
 NeoBundle 'Shougo/neosnippet.vim'
 NeoBundle 'Shougo/neosnippet-snippets'
-NeoBundle 'git://github.com/vim-scripts/taglist.vim.git'
-NeoBundle 'git://github.com/intuited/lh-vim-lib.git'
-NeoBundle 'git://github.com/intuited/lh-vim-ut.git'
+NeoBundle 'vim-jp/vimdoc-ja'
+NeoBundle 'vim-scripts/taglist.vim'
+NeoBundle 'intuited/lh-vim-lib'
+NeoBundle 'intuited/lh-vim-ut'
 NeoBundle 'fholgado/minibufexpl.vim'
-NeoBundle 'git://github.com/vim-scripts/grep.vim.git'
+NeoBundle 'vim-scripts/grep.vim'
 NeoBundle 'ujihisa/unite-colorscheme'
 NeoBundle 'fuenor/qfixhowm'
 NeoBundle 'Lokaltog/vim-easymotion'
@@ -387,6 +391,8 @@ NeoBundle 'vim-jp/vim-cpp'
 
 "NeoBundle 'eagletmt/vim-watchdogs'
 
+"helptag
+execute 'helptags '.expand($PATH_NBDL.'/vimdoc-ja/doc')
 
 "Unite Sources
 NeoBundle 'Shougo/unite-outline'
@@ -432,7 +438,8 @@ set undofile
 "grep.vim settings
 """""""""""""""""""""""""""""""""""""""""""""""""""
 if has('win32') || has('win64')
-  let MY_GREP_PATH_ROOT='C:\msys\bin'
+  "let MY_GREP_PATH_ROOT='C:\msys\bin'
+  let MY_GREP_PATH_ROOT='C:\msys64\usr\bin'
   let Grep_Path=MY_GREP_PATH_ROOT.'\grep.exe'
   let Fgrep_Path=MY_GREP_PATH_ROOT.'\grep.exe -F'
   let Egrep_Path=MY_GREP_PATH_ROOT.'\grep.exe -E'

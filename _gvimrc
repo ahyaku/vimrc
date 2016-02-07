@@ -1,7 +1,8 @@
 "set encoding=euc-jp
 "Auto encode detection.
-set fileencodings=iso-2022jp,cp932,sjis,euc-jp,utf-8
-
+"set fileencodings=utf-8,iso-2022jp,cp932,sjis,euc-jp
+set fileencodings=utf-8,iso-2022jp,sjis,euc-jp
+set fileformats=unix,dos
 "Change Tab Switch
 if v:version>=700
     nnoremap <C-Tab>   gt
