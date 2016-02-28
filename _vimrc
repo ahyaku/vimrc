@@ -256,7 +256,8 @@ else
   set runtimepath+=~/.cabal/bin/
   set runtimepath+=~/.cabal/
 endif
-set runtimepath+=$VIM/.vim/dein/repos/github.com/Shougo/dein.vim
+let $PATH_DEIN=substitute(expand($VIM), "\\", "/", "g")."/.vim/dein/repos/github.com/Shougo/dein.vim"
+set runtimepath+=$PATH_DEIN
 
 "Status-Checking function to switch neocomplete (which requires lua) / neobundle.
 function! s:meet_neocomplete_requirements()
@@ -265,6 +266,15 @@ endfunction
 """""""""""""""""""""""""""""""""""""""""""""""""""
 "dein.vim setting
 """""""""""""""""""""""""""""""""""""""""""""""""""
+"let $PATH_HOGE=substitute(expand($VIM), "\\", "/", "g")."/hoge/fuga"
+"if !isdirectory(expand($PATH_HOGE))
+"  execute "call mkdir(\"".substitute(expand($VIM), "\\", "/", "g")."/hoge/fuga\",\"p\")"
+"endif
+if !isdirectory(expand($PATH_DEIN))
+  execute "call mkdir(\"".substitute(expand($PATH_DEIN), "\\", "\\\\\\\\", "g")."\",\"p\")"
+  execute '!git clone https://github.com/Shougo/dein.vim' $PATH_DEIN
+endif
+
 let $ROOT_DEIN=expand($VIM.'/.vim/dein')
 if &compatible
   set nocompatible
