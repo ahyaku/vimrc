@@ -10,13 +10,7 @@ if v:version>=700
 endif
 
 "Color Setting
-"colorscheme evening
-"colorscheme landscape
-"colorscheme moria
 colorscheme evening
-"colorscheme hybrid
-"colorscheme darkblue
-"colorscheme lucius
 
 "Display Line Numbers
 set number
@@ -124,27 +118,6 @@ hi CursorLine guibg = Black
 "hi CursorLine guibg = DarkBlue
 "hi CursorLine guibg = #400040
 hi Search guibg=Yellow guifg=Red
-
-
-"Change the color of the status line
-"augroup InsertHook
-"    autocmd!
-""    autocmd InsertEnter * highlight StatusLine guifg=#ccdc90 guibg=#2E4340
-""    autocmd InsertLeave * highlight StatusLine guifg=#2E4340 guibg=#ccdc90
-"    autocmd InsertEnter * highlight StatusLine guifg=DarkBlue guibg=#ccdc90
-"    autocmd InsertLeave * highlight StatusLine guifg=DarkGreen guibg=#ccdc90
-"augroup END
-
-"filetype off
-"filetype plugin indent off
-"filetype on
-"filetype plugin indent on
-"augroup MyVimFilerColorScheme
-"    autocmd!
-"    autocmd FileType vimfiler hi LineNr guifg=Red
-"    autocmd Filetype vimfiler let geho = 1234
-"augroup END
-
 let g:lightline = {
   \ 'colorscheme': 'Tomorrow_Night_Blue',
   \ }
@@ -152,3 +125,27 @@ let g:lightline = {
 hi LineNr guifg=LightRed
 hi CursorLineNr guifg=Green guibg=Black
 hi MatchParen gui=underline,bold,reverse guisp=Red guibg=NONE guifg=NONE
+
+"Move GUI Window Position
+nnoremap <C-S-Left> :<C-u>call MyFunc_MoveGUIWindowPos(-30, 0)<CR>
+nnoremap <C-S-Right> :<C-u>call MyFunc_MoveGUIWindowPos(30, 0)<CR>
+nnoremap <C-S-Up> :<C-u>call MyFunc_MoveGUIWindowPos(0, -30)<CR>
+nnoremap <C-S-Down> :<C-u>call MyFunc_MoveGUIWindowPos(0, 30)<CR>
+function! MyFunc_MoveGUIWindowPos(dx, dy)
+  let l:cx = getwinposx()
+  let l:cy = getwinposy()
+  let l:nx = l:cx + a:dx
+  let l:ny = l:cy + a:dy
+  if l:nx < 0
+    let l:nx = 0
+  else
+    " Do Nothing..
+  endif
+  if l:ny < 0
+    let l:ny = 0
+  else
+    " Do Nothing..
+  endif
+    execute "winpos " . l:nx . " " . l:ny
+endfunction
+
