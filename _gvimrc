@@ -105,18 +105,13 @@ else
 endif
 
 "EasyMotion Color Scheme
-"hi EasyMotionTarget gui=bold guibg=darkblue guifg=yellow
 hi EasyMotionTarget gui=bold guibg=yellow guifg=darkred
 
 " Stored in /usr/share/vim/vimfiles/colors/evening_modif.vim
 hi Pmenu guibg=black guifg=green gui=bold
-"hi Pmenu ctermbg=4
 hi PmenuSel guibg=darkcyan guifg=white gui=bold
-"hi ErrorMsg guifg=green term=standout ctermbg=DarkRed ctermfg=White guibg=Red guifg=White
 hi WarningMsg term=standout ctermfg=LightRed guifg=green
 hi CursorLine guibg = Black
-"hi CursorLine guibg = DarkBlue
-"hi CursorLine guibg = #400040
 hi Search guibg=Yellow guifg=Red
 let g:lightline = {
   \ 'colorscheme': 'Tomorrow_Night_Blue',
@@ -125,6 +120,7 @@ let g:lightline = {
 hi LineNr guifg=LightRed
 hi CursorLineNr guifg=Green guibg=Black
 hi MatchParen gui=underline,bold,reverse guisp=Red guibg=NONE guifg=NONE
+hi Visual guibg=darkcyan
 
 "Move GUI Window Position
 nnoremap <silent><C-S-Left> :<C-u>call MyFunc_MoveGUIWindowPos(-30, 0)<CR>

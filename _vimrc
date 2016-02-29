@@ -12,8 +12,10 @@ if v:version>=700
 endif
 nnoremap <Space>th :tabfirst<CR>
 nnoremap <Space>tl :tablast<CR>
+set t_Co=256
 "Color Setting
-colorscheme evening
+colorscheme desert
+"colorscheme evening
 "Display Line Numbers
 set number
 "Enable Incremental search
@@ -1012,14 +1014,21 @@ func! MyFunc_DirDiffWithVimFiler()
 endfunc
 
 "With ":highlight" command, check the current colorscheme setting.
-hi Normal ctermbg=black
-hi CursorLine cterm=NONE ctermbg=darkblue
-hi Underlined cterm=NONE ctermfg=11
-"hi Underlined cterm=NONE ctermfg=darkcyan
-hi Constant cterm=NONE ctermbg=0 ctermfg=11
-hi Special cterm=NONE ctermbg=0 ctermfg=11
-hi Comment cterm=NONE ctermbg=0 ctermfg=darkcyan
-hi PreProc cterm=NONE ctermfg=cyan
+hi Normal ctermbg=NONE
+"EasyMotion Color Scheme
+hi EasyMotionTarget cterm=bold ctermbg=yellow ctermfg=red
+
+hi Pmenu ctermbg=black ctermfg=green cterm=bold
+hi PmenuSel ctermbg=darkcyan ctermfg=white cterm=bold
+hi WarningMsg term=standout ctermfg=LightRed guifg=green
+hi Search ctermbg=Yellow ctermfg=Red
+
+"hi CursorLine cterm=NONE ctermbg=Black
+hi CursorLine ctermbg=Black
+hi LineNr ctermfg=LightRed
+hi CursorLineNr ctermfg=Green ctermbg=Black
+hi MatchParen cterm=underline,bold,reverse guisp=Red ctermbg=NONE ctermfg=NONE
+
 
 "Memo: How to convert file formats on Vim
 "http://advweb.seesaa.net/article/3074705.html
