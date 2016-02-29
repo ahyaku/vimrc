@@ -127,10 +127,10 @@ hi CursorLineNr guifg=Green guibg=Black
 hi MatchParen gui=underline,bold,reverse guisp=Red guibg=NONE guifg=NONE
 
 "Move GUI Window Position
-nnoremap <C-S-Left> :<C-u>call MyFunc_MoveGUIWindowPos(-30, 0)<CR>
-nnoremap <C-S-Right> :<C-u>call MyFunc_MoveGUIWindowPos(30, 0)<CR>
-nnoremap <C-S-Up> :<C-u>call MyFunc_MoveGUIWindowPos(0, -30)<CR>
-nnoremap <C-S-Down> :<C-u>call MyFunc_MoveGUIWindowPos(0, 30)<CR>
+nnoremap <silent><C-S-Left> :<C-u>call MyFunc_MoveGUIWindowPos(-30, 0)<CR>
+nnoremap <silent><C-S-Right> :<C-u>call MyFunc_MoveGUIWindowPos(30, 0)<CR>
+nnoremap <silent><C-S-Up> :<C-u>call MyFunc_MoveGUIWindowPos(0, -30)<CR>
+nnoremap <silent><C-S-Down> :<C-u>call MyFunc_MoveGUIWindowPos(0, 30)<CR>
 function! MyFunc_MoveGUIWindowPos(dx, dy)
   let l:cx = getwinposx()
   let l:cy = getwinposy()
