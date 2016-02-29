@@ -388,6 +388,12 @@ if has('win32') || has('win64')
   let Grep_Find_Path=MY_GREP_PATH_ROOT.'\find.exe'
   let Grep_Xargs_Path=MY_GREP_PATH_ROOT.'\xargs.exe'
 else
+  let MY_GREP_PATH_ROOT='/usr/bin'
+  let Grep_Path=MY_GREP_PATH_ROOT.'/grep'
+  let Fgrep_Path=MY_GREP_PATH_ROOT.'/grep -F'
+  let Egrep_Path=MY_GREP_PATH_ROOT.'/grep -E'
+  let Grep_Find_Path=MY_GREP_PATH_ROOT.'/find'
+  let Grep_Xargs_Path=MY_GREP_PATH_ROOT.'/xargs'
 endif
 " Specify the Quotation Character.
 let Grep_Shell_Quote_Char=''''

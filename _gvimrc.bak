@@ -1,0 +1,151 @@
+"set encoding=euc-jp
+"Auto encode detection.
+"set fileencodings=utf-8,iso-2022jp,cp932,sjis,euc-jp
+set fileencodings=utf-8,iso-2022jp,sjis,euc-jp
+set fileformats=unix,dos
+"Change Tab Switch
+if v:version>=700
+    nnoremap <C-Tab>   gt
+    nnoremap <C-S-Tab> gT
+endif
+
+"Color Setting
+colorscheme evening
+
+"Display Line Numbers
+set number
+
+"Enable Incremental search
+set incsearch
+
+"Ignore case in search patterns
+set ignorecase 
+
+"Recognize a difference between large and small figures
+set smartcase
+
+"Tab width
+set tabstop=4
+
+"Auto indent width
+set shiftwidth=4
+
+"Insert space instead of Tab
+set expandtab
+
+"Make new indent and current indent same
+set autoindent
+
+"Enable high level indent when new line made
+set smartindent
+
+"Emphasize corresponding {} when } written
+set showmatch
+
+"Highlight Searched Words
+set hlsearch
+
+"Hightlight Cursor Line
+set cursorline
+
+set ruler
+
+"Window always has the statusline
+set laststatus=2
+
+"Copy words from other applications with p key
+if has('unnamedplus')
+    set clipboard=unnamedplus
+else
+    set clipboard=unnamed
+endif
+
+"Enable mouse control
+set mouse=a
+
+"Enable syntax highlight
+syntax on
+
+"Font Size
+if has('win32') || has('win64')
+  "For Windows
+  set guifont=MS_Gothic:h10:cSHIFTJIS
+else
+endif
+"Indent Setting for *.sh
+autocmd! FileType sh,vim setlocal tabstop=2 softtabstop=0 shiftwidth=2
+set guioptions-=T
+set guioptions-=m
+" Toggle to display Menu/Tool bars or NOT.
+noremap <silent> <F2> : if &guioptions=~# 'T' <Bar>
+                            \set guioptions-=T <Bar>
+                            \set guioptions-=m <Bar>
+                        \else <Bar>
+                            \set guioptions+=T <Bar>
+                            \set guioptions+=m <Bar>
+                        \endif<CR>
+
+"Change screen size
+nnoremap <S-Right> :set columns+=10<CR>
+nnoremap <S-Left>  :set columns-=10<CR>
+nnoremap <S-Up>    :set lines+=10<CR>
+nnoremap <S-Down>  :set lines-=10<CR>
+
+"Change cursor color depending on IME ON/OFF
+if has('multi_byte_ime')
+  "highlight Cursor guifg=NONE guibg=DarkGreen
+  "highlight Cursor guifg=NONE guibg=#006400
+  "highlight Cursor guifg=white guibg=DarkGreen
+  "highlight Cursor guifg=#6060af gui=bold,reverse
+  highlight Cursor guifg=white guibg=#6060af gui=bold
+  highlight CursorIM guifg=white guibg=Red
+else
+  highlight Cursor guifg=white guibg=#6060af gui=bold
+  "highlight CursorIM guifg=white guibg=Red
+endif
+
+"EasyMotion Color Scheme
+"hi EasyMotionTarget gui=bold guibg=darkblue guifg=yellow
+hi EasyMotionTarget gui=bold guibg=yellow guifg=darkred
+
+" Stored in /usr/share/vim/vimfiles/colors/evening_modif.vim
+hi Pmenu guibg=black guifg=green gui=bold
+"hi Pmenu ctermbg=4
+hi PmenuSel guibg=darkcyan guifg=white gui=bold
+"hi ErrorMsg guifg=green term=standout ctermbg=DarkRed ctermfg=White guibg=Red guifg=White
+hi WarningMsg term=standout ctermfg=LightRed guifg=green
+hi CursorLine guibg = Black
+"hi CursorLine guibg = DarkBlue
+"hi CursorLine guibg = #400040
+hi Search guibg=Yellow guifg=Red
+let g:lightline = {
+  \ 'colorscheme': 'Tomorrow_Night_Blue',
+  \ }
+
+hi LineNr guifg=LightRed
+hi CursorLineNr guifg=Green guibg=Black
+hi MatchParen gui=underline,bold,reverse guisp=Red guibg=NONE guifg=NONE
+
+"Move GUI Window Position
+nnoremap <C-S-Left> :<C-u>call MyFunc_MoveGUIWindowPos(-30, 0)<CR>
+nnoremap <C-S-Right> :<C-u>call MyFunc_MoveGUIWindowPos(30, 0)<CR>
+nnoremap <C-S-Up> :<C-u>call MyFunc_MoveGUIWindowPos(0, -30)<CR>
+nnoremap <C-S-Down> :<C-u>call MyFunc_MoveGUIWindowPos(0, 30)<CR>
+function! MyFunc_MoveGUIWindowPos(dx, dy)
+  let l:cx = getwinposx()
+  let l:cy = getwinposy()
+  let l:nx = l:cx + a:dx
+  let l:ny = l:cy + a:dy
+  if l:nx < 0
+    let l:nx = 0
+  else
+    " Do Nothing..
+  endif
+  if l:ny < 0
+    let l:ny = 0
+  else
+    " Do Nothing..
+  endif
+    execute "winpos " . l:nx . " " . l:ny
+endfunction
+
