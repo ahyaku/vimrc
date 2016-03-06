@@ -243,8 +243,10 @@ nnoremap <Space>tn.
 \        :<C-u>tabnew<CR>
 nnoremap <C-T><C-N>
 \        :<C-u>tabnew<CR>
+"Disable "IM ON" when switch to Normal Mode.
+inoremap <silent><ESC> <ESC>:set iminsert=0<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"neobundle settings
+"Path setting
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 filetype plugin indent off
 set runtimepath&
