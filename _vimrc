@@ -1030,6 +1030,9 @@ hi CursorLine ctermbg=Black
 hi LineNr ctermfg=LightRed
 hi CursorLineNr ctermfg=Green ctermbg=Black
 hi MatchParen cterm=underline,bold,reverse guisp=Red ctermbg=NONE ctermfg=NONE
+"Setting for "desert" theme.
+hi Special cterm=NONE ctermbg=NONE ctermfg=blue
+hi PreProc cterm=NONE ctermbg=NONE ctermfg=blue
 
 
 "Memo: How to convert file formats on Vim
