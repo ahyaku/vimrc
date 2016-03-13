@@ -95,8 +95,8 @@ else
     autocmd! InsertLeave * call system('fcitx-remote -c')
   endif
 endif
-"Indent Setting for *.shtem90
-autocmd! FileType sh,vim setlocal tabstop=2 softtabstop=0 shiftwidth=2
+"Indent Setting [NOTE: check filetype with ":set filetype"]
+autocmd! FileType sh,vim,javascript,json,html setlocal tabstop=2 softtabstop=0 shiftwidth=2
 autocmd! FileType hs setlocal tabstop=4 softtabstop=0 shiftwidth=4
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "lightline Settings

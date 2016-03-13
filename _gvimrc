@@ -11,6 +11,7 @@ endif
 
 "Color Setting
 colorscheme evening
+"colorscheme desert
 
 "Display Line Numbers
 set number
@@ -72,8 +73,6 @@ if has('win32') || has('win64')
   set guifont=MS_Gothic:h10:cSHIFTJIS
 else
 endif
-"Indent Setting for *.sh
-autocmd! FileType sh,vim setlocal tabstop=2 softtabstop=0 shiftwidth=2
 set guioptions-=T
 set guioptions-=m
 " Toggle to display Menu/Tool bars or NOT.
