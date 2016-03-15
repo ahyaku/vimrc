@@ -10,6 +10,8 @@ if v:version>=700
   nnoremap <C-Tab>   gt
   nnoremap <C-S-Tab> gT
 endif
+nnoremap <C-N> gt
+nnoremap <C-P> gT
 nnoremap <Space>th :tabfirst<CR>
 nnoremap <Space>tl :tablast<CR>
 set t_Co=256
