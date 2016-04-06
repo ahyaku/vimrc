@@ -83,6 +83,7 @@ set tags=tags;
 if has('win32') || has('win64')
   let Tlist_Ctags_Cmd = 'C:\ctags58\ctags.exe'
 else
+  let Tlist_Ctags_Cmd =  '/usr/bin/ctags'
 endif
 "Font Size
 if has('win32') || has('win64')
@@ -257,11 +258,14 @@ if has('win32') || has('win64')
   set runtimepath^=$VIM_HOME
   set runtimepath^=$VIM_HOME/.vim
   set runtimepath^=$VIM_HOME/plugins/vimproc
+  let $PATH_CTAGS = "C:/ctags58"
 else
   "For Haskell dev environment
   set runtimepath+=~/.cabal/bin/
   set runtimepath+=~/.cabal/
+  let $PATH_CTAGS = "/usr/bin/ctags"
 endif
+set runtimepath+=$PATH_CTAGS
 let $PATH_DEIN=substitute(expand($VIM), "\\", "/", "g")."/.vim/dein/repos/github.com/Shougo/dein.vim"
 set runtimepath+=$PATH_DEIN
 
@@ -959,12 +963,7 @@ command! MyFuncToggleFullScreen :let my_fullscreen_state = MyFunc_ToggleFullScre
 "Create ctags from vim
 """""""""""""""""""""""""""""""""""""""""""""""""""
 "Specify ctags path.
-if has('win32') || has('win64')
-    let Ctags_Path = "C:\\ctags58\\ctags.exe"
-else
-    let Ctags_Path = "/usr/bin/ctags"
-endif
-command! Ctags :call MyFunc_GenerateCtags(Ctags_Path)
+command! Ctags :call MyFunc_GenerateCtags(Tlist_Ctags_Cmd)
 func! MyFunc_GenerateCtags(ctags)
   let l:current_dir = getcwd()
   let l:target_dir = input("Create ctags in which dir?: ", expand("%:p:h"))
