@@ -10,8 +10,8 @@ if v:version>=700
   nnoremap <C-Tab>   gt
   nnoremap <C-S-Tab> gT
 endif
-nnoremap <C-N> gt
-nnoremap <C-P> gT
+"nnoremap <C-N> gt
+"nnoremap <C-P> gT
 nnoremap <Space>th :tabfirst<CR>
 nnoremap <Space>tl :tablast<CR>
 set t_Co=256
@@ -81,9 +81,9 @@ set nrformats=hex
 set tags=tags;
 "Specify ctags to utilize Taglist correctly.
 if has('win32') || has('win64')
-  let Tlist_Ctags_Cmd = 'C:\ctags58\ctags.exe'
+  let Tlist_Ctags_Cmd='C:\ctags58\ctags.exe'
 else
-  let Tlist_Ctags_Cmd =  '/usr/bin/ctags'
+  let Tlist_Ctags_Cmd='/usr/bin/ctags'
 endif
 "Font Size
 if has('win32') || has('win64')
@@ -335,6 +335,7 @@ call dein#add('eagletmt/neco-ghc')
 call dein#add('ujihisa/ref-hoogle')
 call dein#add('mattn/emmet-vim')
 call dein#add('vim-jp/vim-cpp')
+call dein#add('ctrlpvim/ctrlp.vim')
 
 "Unite Sources
 call dein#add('Shougo/unite-outline')
@@ -365,6 +366,46 @@ call dein#end()
 "helptag
 execute 'helptags '.expand($ROOT_DEIN.'/repos/github.com/vim-jp/vimdoc-ja/doc')
 filetype plugin indent on
+"""""""""""""""""""""""""""""""""""""""""""""""""""
+"Ctrlp setting
+"""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:20,results:20'
+let g:ctrlp_prompt_mappings = {
+  \ 'PrtBS()':              ['<bs>', '<c-]>', '<c-h>'],
+  \ 'PrtDelete()':          ['<del>'],
+  \ 'PrtDeleteWord()':      ['<c-w>'],
+  \ 'PrtClear()':           ['<c-u>'],
+  \ 'PrtSelectMove("j")':   ['<c-j>', '<down>'],
+  \ 'PrtSelectMove("k")':   ['<c-k>', '<up>'],
+  \ 'PrtSelectMove("t")':   ['<Home>', '<kHome>'],
+  \ 'PrtSelectMove("b")':   ['<End>', '<kEnd>'],
+  \ 'PrtSelectMove("u")':   ['<PageUp>', '<kPageUp>'],
+  \ 'PrtSelectMove("d")':   ['<PageDown>', '<kPageDown>'],
+  \ 'PrtHistory(-1)':       ['<c-n>'],
+  \ 'PrtHistory(1)':        ['<c-p>'],
+  \ 'AcceptSelection("e")': ['<cr>', '<2-LeftMouse>'],
+  \ 'AcceptSelection("h")': ['<c-x>', '<c-cr>', '<c-s>'],
+  \ 'AcceptSelection("t")': ['<c-t>'],
+  \ 'AcceptSelection("v")': ['<c-v>', '<RightMouse>'],
+  \ 'ToggleFocus()':        ['<s-tab>'],
+  \ 'ToggleRegex()':        ['<c-r>'],
+  \ 'ToggleByFname()':      ['<c-d>'],
+  \ 'ToggleType(1)':        ['<c-f>', '<c-up>'],
+  \ 'ToggleType(-1)':       ['<s-f>', '<c-down>'],
+  \ 'PrtExpandDir()':       ['<tab>'],
+  \ 'PrtInsert("c")':       ['<MiddleMouse>', '<insert>'],
+  \ 'PrtInsert()':          ['<c-\>'],
+  \ 'PrtCurStart()':        ['<c-a>'],
+  \ 'PrtCurEnd()':          ['<c-e>'],
+  \ 'PrtCurLeft()':         ['<c-b>', '<left>', '<c-^>'],
+  \ 'PrtCurRight()':        ['<c-l>', '<right>'],
+  \ 'PrtClearCache()':      ['<F5>'],
+  \ 'PrtDeleteEnt()':       ['<F7>'],
+  \ 'CreateNewFile()':      ['<c-y>'],
+  \ 'MarkToOpen()':         ['<c-z>'],
+  \ 'OpenMulti()':          ['<c-o>'],
+  \ 'PrtExit()':            ['<esc>', '<c-c>', '<c-g>'],
+  \ }
 """""""""""""""""""""""""""""""""""""""""""""""""""
 "Migemo setting
 """""""""""""""""""""""""""""""""""""""""""""""""""
