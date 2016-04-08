@@ -259,14 +259,17 @@ if has('win32') || has('win64')
   set runtimepath^=$VIM_HOME/.vim
   set runtimepath^=$VIM_HOME/plugins/vimproc
   let $PATH_CTAGS = "C:/ctags58"
+  let $PATH_DEIN=substitute(expand($VIM), "\\", "/", "g")."/.vim/dein/repos/github.com/Shougo/dein.vim"
+  let $ROOT_DEIN=expand($VIM.'/.vim/dein')
 else
   "For Haskell dev environment
   set runtimepath+=~/.cabal/bin/
   set runtimepath+=~/.cabal/
   let $PATH_CTAGS = "/usr/bin/ctags"
+  let $PATH_DEIN=substitute(expand($HOME), "\\", "/", "g")."/.vim/dein/repos/github.com/Shougo/dein.vim"
+  let $ROOT_DEIN=expand($HOME.'/.vim/dein')
 endif
 set runtimepath+=$PATH_CTAGS
-let $PATH_DEIN=substitute(expand($VIM), "\\", "/", "g")."/.vim/dein/repos/github.com/Shougo/dein.vim"
 set runtimepath+=$PATH_DEIN
 
 "Status-Checking function to switch neocomplete (which requires lua) / neobundle.
@@ -285,7 +288,6 @@ if !isdirectory(expand($PATH_DEIN))
   execute '!git clone https://github.com/Shougo/dein.vim' $PATH_DEIN
 endif
 
-let $ROOT_DEIN=expand($VIM.'/.vim/dein')
 if &compatible
   set nocompatible
 endif
