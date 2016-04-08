@@ -259,16 +259,15 @@ if has('win32') || has('win64')
   set runtimepath^=$VIM_HOME/.vim
   set runtimepath^=$VIM_HOME/plugins/vimproc
   let $PATH_CTAGS = "C:/ctags58"
-  let $PATH_DEIN=substitute(expand($VIM), "\\", "/", "g")."/.vim/dein/repos/github.com/Shougo/dein.vim"
-  let $ROOT_DEIN=expand($VIM.'/.vim/dein')
+  let $ROOT_DEIN=substitute(expand($VIM), "\\", "/", "g").'/.vim/dein'
 else
   "For Haskell dev environment
   set runtimepath+=~/.cabal/bin/
   set runtimepath+=~/.cabal/
   let $PATH_CTAGS = "/usr/bin/ctags"
-  let $PATH_DEIN=substitute(expand($HOME), "\\", "/", "g")."/.vim/dein/repos/github.com/Shougo/dein.vim"
-  let $ROOT_DEIN=expand($HOME.'/.vim/dein')
+  let $ROOT_DEIN=expand($HOME).'/.vim/dein'
 endif
+let $PATH_DEIN=expand($ROOT_DEIN).'/repos/github.com/Shougo/dein.vim'
 set runtimepath+=$PATH_CTAGS
 set runtimepath+=$PATH_DEIN
 
