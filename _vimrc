@@ -253,7 +253,7 @@ nnoremap <Space>tn.
 nnoremap <C-T><C-N>
 \        :<C-u>tabnew<CR>
 "Disable "IM ON" when switch to Normal Mode.
-inoremap <silent><ESC> <ESC>:set iminsert=0<CR>
+"inoremap <silent><ESC> <ESC>:set iminsert=0<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "Path setting
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -317,6 +317,7 @@ call dein#add('Shougo/neocomplete.vim')
 call dein#add('Shougo/neobundle.vim')
 call dein#add('vim-jp/vital.vim')
 call dein#add('Shougo/unite.vim')
+"call dein#add('vim-ctrlspace/vim-ctrlspace')
 call dein#add('Shougo/neomru.vim')
 call dein#add('Shougo/vimfiler')
 call dein#add('Shougo/vimshell')
@@ -893,7 +894,7 @@ let g:EasyMotion_do_shade = 0
 """""""""""""""""""""""""""""""""""""""""""""""""""
 "SmartChar settings
 """""""""""""""""""""""""""""""""""""""""""""""""""
-inoremap <expr> = MySmartChar_CharEq()
+"inoremap <expr> = MySmartChar_CharEq()
 " Change the input behavior when '=' is input.
 " NOTE: '\%#' means the cursor position
 "       Refer to the help "pattern.txt" for the reference.
@@ -1074,6 +1075,7 @@ hi PmenuSel ctermbg=darkcyan ctermfg=white cterm=bold
 hi WarningMsg term=standout ctermfg=LightRed guifg=green
 hi Search ctermbg=Yellow ctermfg=Red
 
+"hi Cursor ctermfg=white ctermbg=red
 "hi CursorLine cterm=NONE ctermbg=Black
 hi CursorLine ctermbg=Black
 hi LineNr ctermfg=LightRed
