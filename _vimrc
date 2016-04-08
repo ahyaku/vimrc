@@ -163,6 +163,12 @@ augroup Quickfix
   autocmd FileType qf nnoremap <silent><buffer> q :<C-u>ccl<CR>
   "autocmd FileType qf nnoremap q :<C-u>ccl<CR>
 augroup END
+"Change the Unite keymap to the same as ctrlp
+augroup Unite
+  autocmd!
+  autocmd FileType unite imap <silent><buffer> <C-J> <Plug>(unite_select_next_line)
+  autocmd FileType unite imap <silent><buffer> <C-K> <Plug>(unite_select_previous_line)
+augroup END
 "Replace ":" with ";" in Normal mode
 "nnoremap ; :
 "nnoremap : ;
@@ -291,6 +297,21 @@ if &compatible
   set nocompatible
 endif
 call dein#begin($ROOT_DEIN)
+"Build vimproc automatically.
+if has('win32') || has('win64')
+  " NOT install vimproc via NeoBundle
+  " because it is included in Kaoriya Vim
+else
+  call dein#add('Shougo/vimproc.vim', {'build': 'make'})
+"	call dein#add('Shougo/vimproc.vim', {
+"    \ 'build' : {
+"    \     'windows' : 'make -f make_mingw64.mak',
+"    \     'cygwin' : 'make -f make_cygwin.mak',
+"    \     'mac' : 'make -f make_mac.mak',
+"    \     'unix' : 'make -f make_unix.mak',
+"    \    },
+"    \ })
+endif
 call dein#add('Shougo/dein.vim')
 call dein#add('Shougo/neocomplete.vim')
 call dein#add('Shougo/neobundle.vim')
@@ -308,8 +329,8 @@ call dein#add('Shougo/neosnippet.vim')
 call dein#add('Shougo/neosnippet-snippets')
 call dein#add('vim-jp/vimdoc-ja')
 call dein#add('vim-scripts/taglist.vim')
-call dein#add('intuited/lh-vim-lib')
-call dein#add('intuited/lh-vim-ut')
+"call dein#add('intuited/lh-vim-lib')
+"call dein#add('intuited/lh-vim-ut')
 call dein#add('fholgado/minibufexpl.vim')
 call dein#add('vim-scripts/grep.vim')
 call dein#add('ujihisa/unite-colorscheme')
@@ -326,14 +347,14 @@ call dein#add('thinca/vim-ref')
 call dein#add('tyru/open-browser.vim')
 call dein#add('chazy/cscope_maps')
 "For Haskell dev environment
-call dein#add('kana/vim-filetype-haskell')
-call dein#add('eagletmt/ghcmod-vim')
-call dein#add('eagletmt/neco-ghc')
+"call dein#add('kana/vim-filetype-haskell')
+"call dein#add('eagletmt/ghcmod-vim')
+"call dein#add('eagletmt/neco-ghc')
 "For ref-hoogle "hoogle" is necessary.
 "Here is the installation example
 "$ cabal install hoogle
 "Usage: type 'K' on the target word in Normal mode.
-call dein#add('ujihisa/ref-hoogle')
+"call dein#add('ujihisa/ref-hoogle')
 call dein#add('mattn/emmet-vim')
 call dein#add('vim-jp/vim-cpp')
 call dein#add('ctrlpvim/ctrlp.vim')
@@ -341,28 +362,13 @@ call dein#add('ctrlpvim/ctrlp.vim')
 "Unite Sources
 call dein#add('Shougo/unite-outline')
 call dein#add('tsukkee/unite-help')
-call dein#add('tyru/eskk.vim')
-call dein#add('tyru/skkdict.vim')
+"call dein#add('tyru/eskk.vim')
+"call dein#add('tyru/skkdict.vim')
 call dein#add('itchyny/lightline.vim')
 call dein#add('tpope/vim-abolish')
 call dein#add('thinca/vim-unite-history')
 call dein#add('koron/cmigemo')
 call dein#add('haya14busa/vim-migemo')
-"Build vimproc automatically.
-if has('win32') || has('win64')
-  " NOT install vimproc via NeoBundle
-  " because it is included in Kaoriya Vim
-else
-  "call dein#add('Shougo/vimproc.vim', {'build': 'make'})
-	call dein#add('Shougo/vimproc.vim', {
-    \ 'build' : {
-    \     'windows' : 'make -f make_mingw64.mak',
-    \     'cygwin' : 'make -f make_cygwin.mak',
-    \     'mac' : 'make -f make_mac.mak',
-    \     'unix' : 'make -f make_unix.mak',
-    \    },
-    \ })
-endif
 call dein#end()
 "helptag
 execute 'helptags '.expand($ROOT_DEIN.'/repos/github.com/vim-jp/vimdoc-ja/doc')
