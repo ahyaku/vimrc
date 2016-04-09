@@ -276,6 +276,7 @@ endif
 let $PATH_DEIN=expand($ROOT_DEIN).'/repos/github.com/Shougo/dein.vim'
 set runtimepath+=$PATH_CTAGS
 set runtimepath+=$PATH_DEIN
+set runtimepath+=expand($ROOT_DEIN).'/repos/github.com'
 
 "Status-Checking function to switch neocomplete (which requires lua) / neobundle.
 function! s:meet_neocomplete_requirements()
