@@ -99,8 +99,11 @@ else
   endif
 endif
 "Indent Setting [NOTE: check filetype with ":set filetype"]
-autocmd! FileType sh,vim,javascript,json,html setlocal tabstop=2 softtabstop=0 shiftwidth=2
-autocmd! FileType hs setlocal tabstop=4 softtabstop=0 shiftwidth=4
+augroup Tabstop
+  autocmd!
+  autocmd FileType sh,vim,javascript,json,html setlocal tabstop=2 softtabstop=0 shiftwidth=2
+  autocmd FileType hs setlocal tabstop=4 softtabstop=0 shiftwidth=4
+augroup END
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "lightline Settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -243,8 +246,13 @@ nnoremap <Space>v.
 nnoremap <Space>g.
 \        :<C-u>edit $MYGVIMRC<CR>
 "Reload _vimrc and _gvimrc
+if has('gui_running')
 nnoremap <Space>s.
 \        :<C-u>source $MYVIMRC<CR> :source $MYGVIMRC<CR>
+else
+nnoremap <Space>s.
+\        :<C-u>source $MYVIMRC<CR>
+endif
 "Switch to alternative buffer.
 nnoremap <Space>b.
 \        :<C-u>edit #<CR>
@@ -657,11 +665,14 @@ if s:meet_neocomplete_requirements()
   "inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
 
   " Enable omni completion.
-  autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-  autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-  autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-  autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-  autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+  augroup OmniCompletion
+    autocmd!
+    autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+    autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+    autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+    autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+    autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+  augroup END
 
   " Enable heavy omni completion.
   if !exists('g:neocomplete#sources#omni#input_patterns')
@@ -1029,41 +1040,55 @@ nnoremap <C-Q><C-Q><C-J> <C-X>
 """""""""""""""""""""""""""""""""""""""""""""""""""
 "set nofoldenable
 "set foldcolumn = 0
-command! Ddiff :call MyFunc_DirDiff()
-func! MyFunc_DirDiff()
-  let l:current_dir = getcwd()
-  let l:fst_dir = input("First dir?: ", expand("%:p:h"), "file")
-  if l:fst_dir == ""
-    return
-  endif
-  echo "\r"
-  let l:snd_dir = input("Second dir?: ", l:fst_dir, "file")
-  if l:snd_dir == ""
-    return
-  endif
-  echo "\r"
-  exe "DirDiff " . l:fst_dir . " ". l:snd_dir
-endfunc
-autocmd! FileType vimfiler command! Ddiff :call MyFunc_DirDiffWithVimFiler()
+"command! Ddiff :call MyFunc_DirDiff()
+"func! MyFunc_DirDiff()
+"  let l:current_dir = getcwd()
+"  let l:fst_dir = input("First dir?: ", expand("%:p:h"), "file")
+"  if l:fst_dir == ""
+"    return
+"  endif
+"  echo "\r"
+"  let l:snd_dir = input("Second dir?: ", l:fst_dir, "file")
+"  if l:snd_dir == ""
+"    return
+"  endif
+"  echo "\r"
+"  exe "DirDiff " . l:fst_dir . " ". l:snd_dir
+"endfunc
+"autocmd! FileType vimfiler command! Ddiff :call MyFunc_DirDiffWithVimFiler()
+command! Ddiff :call MyFunc_DirDiffWithVimFiler()
 func! MyFunc_DirDiffWithVimFiler()
   exe "wincmd w"
-  let l:marked_files = vimfiler#get_marked_files()
+  let l:marked_files = vimfiler#get_marked_filenames(b:vimfiler)
   if len(l:marked_files) < 1
     "echo "Select 2 directries or 2 files."
-    call MyFunc_DirDiff()
+    "call MyFunc_DirDiff()
     return
   endif
-  let l:item_fst = l:marked_files[0]['action__path']
+  let l:item_fst = l:marked_files[0]
   exe "wincmd w"
-  let l:marked_files = vimfiler#get_marked_files()
+  let l:marked_files = vimfiler#get_marked_filenames(b:vimfiler)
   if len(l:marked_files) < 1
     "echo "Select 2 directries or 2 files."
-    call MyFunc_DirDiff()
+    "call MyFunc_DirDiff()
     return
   endif
-  let l:item_sec = l:marked_files[0]['action__path']
-  exe "normal \<Plug>(vimfiler_close)"
-  exe "DirDiff " . l:item_fst . " ". l:item_sec
+  let l:item_sec = l:marked_files[0]
+  let l:fst_is_dir = isdirectory(l:item_fst)
+  let l:sec_is_dir = isdirectory(l:item_sec)
+  if l:fst_is_dir && l:sec_is_dir
+    exe "normal \<Plug>(vimfiler_close)"
+    exe "DirDiff " . l:item_fst . " ". l:item_sec
+  elseif !l:fst_is_dir
+    echo "ERROR_NOT_DIRECTORY!!: " . l:item_fst
+  elseif !l:sec_is_dir
+    echo "ERROR_NOT_DIRECTORY!!: " . l:item_sec
+  else
+    echo "ERROR_NOT_DIRECTORY!!: " . l:item_fst
+    echo "ERROR_NOT_DIRECTORY!!: " . l:item_sec
+  endif
+  "echo l:item_fst . " l:fst_is_dir: " . l:fst_is_dir . ", !l:fst_is_dir: " . !l:fst_is_dir
+  "echo l:item_sec . " l:sec_is_dir: " . l:sec_is_dir . ", !l:sec_is_dir: " . !l:sec_is_dir
 endfunc
 
 "With ":highlight" command, check the current colorscheme setting.
