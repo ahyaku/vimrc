@@ -1056,39 +1056,51 @@ nnoremap <C-Q><C-Q><C-J> <C-X>
 "  exe "DirDiff " . l:fst_dir . " ". l:snd_dir
 "endfunc
 "autocmd! FileType vimfiler command! Ddiff :call MyFunc_DirDiffWithVimFiler()
-command! Ddiff :call MyFunc_DirDiffWithVimFiler()
-func! MyFunc_DirDiffWithVimFiler()
-  exe "wincmd w"
-  let l:marked_files = vimfiler#get_marked_filenames(b:vimfiler)
-  if len(l:marked_files) < 1
+command! Ddiff :call s:Ddiff_DirDiffWithVimFiler()
+func! s:Ddiff_DirDiffWithVimFiler()
+  let l:items = s:Ddiff_SetCompItems()
+  call s:Ddiff_RunDiff(l:items[0], l:items[1]) 
+endfunc
+func! s:Ddiff_SetCompItems()
+  let l:mfiles_cur = vimfiler#get_marked_filenames(b:vimfiler)
+  let l:mfiles_ano = vimfiler#get_marked_filenames(vimfiler#get_another_vimfiler())
+  "echo l:mfiles_cur
+  "echo l:mfiles_ano
+  if len(l:mfiles_cur) < 1
     "echo "Select 2 directries or 2 files."
     "call MyFunc_DirDiff()
     return
   endif
-  let l:item_fst = l:marked_files[0]
-  exe "wincmd w"
-  let l:marked_files = vimfiler#get_marked_filenames(b:vimfiler)
-  if len(l:marked_files) < 1
-    "echo "Select 2 directries or 2 files."
-    "call MyFunc_DirDiff()
-    return
+  if len(l:mfiles_cur) > 1
+    let l:item_fst = l:mfiles_cur[0]
+    let l:item_sec = l:mfiles_cur[1]
+  else
+    let l:mfiles_ano = vimfiler#get_marked_filenames(vimfiler#get_another_vimfiler())
+    if len(l:mfiles_ano) < 1
+      "echo "Select 2 directries or 2 files."
+      "call MyFunc_DirDiff()
+      return
+    endif
+    let l:item_fst = l:mfiles_ano[0]
+    let l:item_sec = l:mfiles_cur[0]
   endif
-  let l:item_sec = l:marked_files[0]
-  let l:fst_is_dir = isdirectory(l:item_fst)
-  let l:sec_is_dir = isdirectory(l:item_sec)
+  return [l:item_fst, l:item_sec]
+endfunc
+func! s:Ddiff_RunDiff(item_fst, item_sec)
+  let l:fst_is_dir = isdirectory(a:item_fst)
+  let l:sec_is_dir = isdirectory(a:item_sec)
   if l:fst_is_dir && l:sec_is_dir
     exe "normal \<Plug>(vimfiler_close)"
-    exe "DirDiff " . l:item_fst . " ". l:item_sec
-  elseif !l:fst_is_dir
-    echo "ERROR_NOT_DIRECTORY!!: " . l:item_fst
-  elseif !l:sec_is_dir
-    echo "ERROR_NOT_DIRECTORY!!: " . l:item_sec
+    exe "DirDiff " . a:item_fst . " ". a:item_sec
+  elseif !l:fst_is_dir && !l:sec_is_dir
+    exe "VimFilerClose default"
+    exe "e " . a:item_sec
+    exe "vert diffsplit " . a:item_fst
   else
-    echo "ERROR_NOT_DIRECTORY!!: " . l:item_fst
-    echo "ERROR_NOT_DIRECTORY!!: " . l:item_sec
+    echo "Error!!: Cannot compare file and directory."
   endif
-  "echo l:item_fst . " l:fst_is_dir: " . l:fst_is_dir . ", !l:fst_is_dir: " . !l:fst_is_dir
-  "echo l:item_sec . " l:sec_is_dir: " . l:sec_is_dir . ", !l:sec_is_dir: " . !l:sec_is_dir
+  "echo a:item_fst . " l:fst_is_dir: " . l:fst_is_dir . ", !l:fst_is_dir: " . !l:fst_is_dir
+  "echo a:item_sec . " l:sec_is_dir: " . l:sec_is_dir . ", !l:sec_is_dir: " . !l:sec_is_dir
 endfunc
 
 "With ":highlight" command, check the current colorscheme setting.
