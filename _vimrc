@@ -16,8 +16,8 @@ nnoremap <Space>th :tabfirst<CR>
 nnoremap <Space>tl :tablast<CR>
 set t_Co=256
 "Color Setting
-colorscheme desert
-"colorscheme evening
+"colorscheme desert
+colorscheme evening
 "Display Line Numbers
 set number
 "Enable Incremental search
@@ -1104,24 +1104,26 @@ func! s:Ddiff_RunDiff(item_fst, item_sec)
 endfunc
 
 "With ":highlight" command, check the current colorscheme setting.
+set background=dark
+hi IndentGuidesOdd ctermbg=5
+hi IndentGuidesEven ctermbg=61
 hi Normal ctermbg=NONE
 "EasyMotion Color Scheme
 hi EasyMotionTarget cterm=bold ctermbg=yellow ctermfg=red
+                    
 
 hi Pmenu ctermbg=black ctermfg=green cterm=bold
 hi PmenuSel ctermbg=darkcyan ctermfg=white cterm=bold
 hi WarningMsg term=standout ctermfg=LightRed guifg=green
 hi Search ctermbg=Yellow ctermfg=Red
-
-"hi Cursor ctermfg=white ctermbg=red
-"hi CursorLine cterm=NONE ctermbg=Black
 hi CursorLine ctermbg=Black
 hi LineNr ctermfg=LightRed
 hi CursorLineNr ctermfg=Green ctermbg=Black
 hi MatchParen cterm=underline,bold,reverse guisp=Red ctermbg=NONE ctermfg=NONE
+hi Visual ctermbg=darkcyan
 "Setting for "desert" theme.
-hi Special cterm=NONE ctermbg=NONE ctermfg=blue
-hi PreProc cterm=NONE ctermbg=NONE ctermfg=blue
+"hi Special cterm=NONE ctermbg=NONE ctermfg=blue
+"hi PreProc cterm=NONE ctermbg=NONE ctermfg=blue
 
 
 "Memo: How to convert file formats on Vim
