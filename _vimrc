@@ -2,6 +2,8 @@
 "set fileencodings=utf-8,iso-2022jp,cp932,sjis,euc-jp
 set fileencodings=utf-8,iso-2022jp,sjis,euc-jp
 set fileformats=unix,dos
+"Backspace behavior
+set backspace=indent,eol,start
 "Enable filetype option.
 filetype off
 filetype on
@@ -515,7 +517,7 @@ if &diff
 "setup for diff mode
   set foldopen=all
 else
-"   setup for non-diff mode
+"setup for non-diff mode
   set foldopen&
 endif
 " Move to the next different point: "]c" 
