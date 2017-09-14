@@ -85,12 +85,6 @@ if has('win32') || has('win64')
 else
   let Tlist_Ctags_Cmd='/usr/bin/ctags'
 endif
-"Font Size
-if has('win32') || has('win64')
-  " Windows
-  set guifont=MS_Gothic:h10:cSHIFTJIS
-else
-endif
 "fcitx Setting
 if has('win32') || has('win64')
 else
@@ -232,7 +226,6 @@ nnoremap <silent><F3>
 nnoremap <silent><Space>cd.
 \   :execute "cd " . expand("%:p:h")<CR>
 \   :pwd<CR>
-
 "Open / Close Quickfix Window
 nnoremap <silent> <C-Q> :cw<CR>
 nnoremap <C-S-Right> :intro
@@ -243,15 +236,30 @@ nnoremap <C-S-Right> :intro
 nnoremap <Space>v.
 \        :<C-u>edit $MYVIMRC<CR>
 "Open _gvimrc
-nnoremap <Space>g.
-\        :<C-u>edit $MYGVIMRC<CR>
-"Reload _vimrc and _gvimrc
-if has('gui_running')
-nnoremap <Space>s.
-\        :<C-u>source $MYVIMRC<CR> :source $MYGVIMRC<CR>
+if has('nvim')
+  if has('win32') || has('win64')
+    nnoremap <Space>g.
+    \        :<C-u>execute 'edit' expand('~').'/AppData/Local/nvim/ginit.vim'<CR>
+  else
+  endif
 else
-nnoremap <Space>s.
-\        :<C-u>source $MYVIMRC<CR>
+  nnoremap <Space>g.
+  \        :<C-u>edit $MYGVIMRC<CR>
+endif
+"Reload _vimrc and _gvimrc
+if has('nvim')
+  if has('win32') || has('win64')
+    nnoremap <Space>s.
+    \        :<C-u>source $MYVIMRC<CR>
+    \        :<C-u>execute 'source' expand('~').'/AppData/Local/nvim/ginit.vim'<CR>
+  else
+  endif
+elseif has('gui_running')
+  nnoremap <Space>s.
+  \        :<C-u>source $MYVIMRC<CR> :source $MYGVIMRC<CR>
+else
+  nnoremap <Space>s.
+  \        :<C-u>source $MYVIMRC<CR>
 endif
 "Switch to alternative buffer.
 nnoremap <Space>b.
@@ -384,46 +392,6 @@ call dein#end()
 execute 'helptags '.expand($ROOT_DEIN.'/repos/github.com/vim-jp/vimdoc-ja/doc')
 filetype plugin indent on
 """""""""""""""""""""""""""""""""""""""""""""""""""
-"Ctrlp setting
-"""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:20,results:20'
-let g:ctrlp_prompt_mappings = {
-  \ 'PrtBS()':              ['<bs>', '<c-]>', '<c-h>'],
-  \ 'PrtDelete()':          ['<del>'],
-  \ 'PrtDeleteWord()':      ['<c-w>'],
-  \ 'PrtClear()':           ['<c-u>'],
-  \ 'PrtSelectMove("j")':   ['<c-j>', '<down>'],
-  \ 'PrtSelectMove("k")':   ['<c-k>', '<up>'],
-  \ 'PrtSelectMove("t")':   ['<Home>', '<kHome>'],
-  \ 'PrtSelectMove("b")':   ['<End>', '<kEnd>'],
-  \ 'PrtSelectMove("u")':   ['<PageUp>', '<kPageUp>'],
-  \ 'PrtSelectMove("d")':   ['<PageDown>', '<kPageDown>'],
-  \ 'PrtHistory(-1)':       ['<c-n>'],
-  \ 'PrtHistory(1)':        ['<c-p>'],
-  \ 'AcceptSelection("e")': ['<cr>', '<2-LeftMouse>'],
-  \ 'AcceptSelection("h")': ['<c-x>', '<c-cr>', '<c-s>'],
-  \ 'AcceptSelection("t")': ['<c-t>'],
-  \ 'AcceptSelection("v")': ['<c-v>', '<RightMouse>'],
-  \ 'ToggleFocus()':        ['<s-tab>'],
-  \ 'ToggleRegex()':        ['<c-r>'],
-  \ 'ToggleByFname()':      ['<c-d>'],
-  \ 'ToggleType(1)':        ['<c-f>', '<c-up>'],
-  \ 'ToggleType(-1)':       ['<s-f>', '<c-down>'],
-  \ 'PrtExpandDir()':       ['<tab>'],
-  \ 'PrtInsert("c")':       ['<MiddleMouse>', '<insert>'],
-  \ 'PrtInsert()':          ['<c-\>'],
-  \ 'PrtCurStart()':        ['<c-a>'],
-  \ 'PrtCurEnd()':          ['<c-e>'],
-  \ 'PrtCurLeft()':         ['<c-b>', '<left>', '<c-^>'],
-  \ 'PrtCurRight()':        ['<c-l>', '<right>'],
-  \ 'PrtClearCache()':      ['<F5>'],
-  \ 'PrtDeleteEnt()':       ['<F7>'],
-  \ 'CreateNewFile()':      ['<c-y>'],
-  \ 'MarkToOpen()':         ['<c-z>'],
-  \ 'OpenMulti()':          ['<c-o>'],
-  \ 'PrtExit()':            ['<esc>', '<c-c>', '<c-g>'],
-  \ }
-"""""""""""""""""""""""""""""""""""""""""""""""""""
 "Migemo setting
 """""""""""""""""""""""""""""""""""""""""""""""""""
 "Not sure the reason why but every first time Vim is launched,
@@ -433,7 +401,9 @@ let g:ctrlp_prompt_mappings = {
 """""""""""""""""""""""""""""""""""""""""""""""""""
 "undofile setting
 """""""""""""""""""""""""""""""""""""""""""""""""""
-if has('win32') || has('win64')
+if has('nvim')
+  let $VIM_BK_ROOT=$HOME
+elseif has('win32') || has('win64')
   let $VIM_BK_ROOT=$VIM
 else
   let $VIM_BK_ROOT=$HOME
@@ -449,12 +419,13 @@ set undofile
 """""""""""""""""""""""""""""""""""""""""""""""""""
 if has('win32') || has('win64')
   "let MY_GREP_PATH_ROOT='C:\msys\bin'
-  let MY_GREP_PATH_ROOT='C:\msys64\usr\bin'
-  let Grep_Path=MY_GREP_PATH_ROOT.'\grep.exe'
-  let Fgrep_Path=MY_GREP_PATH_ROOT.'\grep.exe -F'
-  let Egrep_Path=MY_GREP_PATH_ROOT.'\grep.exe -E'
-  let Grep_Find_Path=MY_GREP_PATH_ROOT.'\find.exe'
-  let Grep_Xargs_Path=MY_GREP_PATH_ROOT.'\xargs.exe'
+  "let MY_GREP_PATH_ROOT='C:\msys64\usr\bin'
+  let MY_GREP_PATH_ROOT='C:\\cygwin64\\bin'
+  let Grep_Path=MY_GREP_PATH_ROOT.'\\grep.exe'
+  let Fgrep_Path=MY_GREP_PATH_ROOT.'\\grep.exe -F'
+  let Egrep_Path=MY_GREP_PATH_ROOT.'\\grep.exe -E'
+  let Grep_Find_Path=MY_GREP_PATH_ROOT.'\\find.exe'
+  let Grep_Xargs_Path=MY_GREP_PATH_ROOT.'\\xargs.exe'
 else
   let MY_GREP_PATH_ROOT='/usr/bin'
   let Grep_Path=MY_GREP_PATH_ROOT.'/grep'
@@ -819,7 +790,7 @@ call unite#custom#source('bookmark', 'sorters', 'sorter_word')
 "unite-grep settings
 nnoremap <silent><C-L><C-S> :Unite -auto-preview -no-quit -buffer-name=my_grep my_grep<CR>
 if has('win32') || has('win64')
-  let AG_PATH ="C:/MinGW/msys/1.0/bin/ag.exe"
+  let AG_PATH ="C:\\MinGW\\msys\\1.0\bin\\ag.exe"
 elseif has('mac')
   let AG_PATH ="/opt/local/bin/ag"
 else
@@ -1121,10 +1092,17 @@ hi LineNr ctermfg=LightRed
 hi CursorLineNr ctermfg=Green ctermbg=Black
 hi MatchParen cterm=underline,bold,reverse guisp=Red ctermbg=NONE ctermfg=NONE
 hi Visual ctermbg=darkcyan
+" Following Cursor highlight settings do not work..
+"if has('nvim')
+"  highlight TermCursor ctermfg=white ctermbg=blue cterm=bold guifg=white guibg=blue gui=bold
+"  highlight TermCursorNC ctermfg=white ctermbg=blue cterm=bold guifg=white guibg=blue gui=bold
+"  highlight Cursor ctermfg=white ctermbg=blue cterm=bold guifg=white guibg=blue gui=bold
+"  "highlight! TermCursor ctermfg=1 ctermbg=2 cterm=bold guifg=white guibg=blue gui=bold
+"  "highlight! Cursor ctermfg=1 ctermbg=2 cterm=bold guifg=white guibg=blue gui=bold
+"endif
 "Setting for "desert" theme.
 "hi Special cterm=NONE ctermbg=NONE ctermfg=blue
 "hi PreProc cterm=NONE ctermbg=NONE ctermfg=blue
-
 
 "Memo: How to convert file formats on Vim
 "http://advweb.seesaa.net/article/3074705.html
@@ -1132,4 +1110,3 @@ hi Visual ctermbg=darkcyan
 ":e ++enc=utf-8
 ":e ++enc=euc-jp
 ":e ++enc=shift_jis
-

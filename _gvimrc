@@ -69,21 +69,26 @@ syntax on
 
 "Font Size
 if has('win32') || has('win64')
-  "For Windows
-  set guifont=MS_Gothic:h10:cSHIFTJIS
+  if has('nvim')
+    Guifont! Consolas:h11
+  else
+    set guifont=MS_Gothic:h10:cSHIFTJIS
+  endif
 else
 endif
 set guioptions-=T
 set guioptions-=m
-" Toggle to display Menu/Tool bars or NOT.
-noremap <silent> <F2> : if &guioptions=~# 'T' <Bar>
-                            \set guioptions-=T <Bar>
-                            \set guioptions-=m <Bar>
-                        \else <Bar>
-                            \set guioptions+=T <Bar>
-                            \set guioptions+=m <Bar>
-                        \endif<CR>
 
+if has(!'nvim')
+  " Toggle to display Menu/Tool bars or NOT.
+  noremap <silent> <F2> : if &guioptions=~# 'T' <Bar>
+                              \set guioptions-=T <Bar>
+                              \set guioptions-=m <Bar>
+                          \else <Bar>
+                              \set guioptions+=T <Bar>
+                              \set guioptions+=m <Bar>
+                          \endif<CR>
+endif
 "Change screen size
 nnoremap <S-Right> :set columns+=10<CR>
 nnoremap <S-Left>  :set columns-=10<CR>
@@ -99,7 +104,17 @@ if has('multi_byte_ime')
   highlight Cursor guifg=white guibg=#6060af gui=bold
   highlight CursorIM guifg=white guibg=Red
 else
-  highlight Cursor guifg=white guibg=#6060af gui=bold
+  if has('nvim')
+    " Following Cursor highlight settings do not work..
+    "highlight TermCursor ctermfg=white ctermbg=blue cterm=bold guifg=white guibg=blue gui=bold
+    "highlight Cursor ctermfg=white ctermbg=blue cterm=bold guifg=white guibg=blue gui=bold
+    "highlight CursorIM ctermfg=white ctermbg=blue cterm=bold guifg=white guibg=blue gui=bold
+    "highlight TermCursor ctermfg=1 ctermbg=2 cterm=bold guifg=white guibg=blue gui=bold
+    "highlight Cursor ctermfg=1 ctermbg=2 cterm=bold guifg=white guibg=blue gui=bold
+  else
+    highlight Cursor guifg=white guibg=#6060af gui=bold
+  endif
+  "highlight Cursor guifg=red guibg=#6060af gui=bold
   "highlight CursorIM guifg=white guibg=Red
 endif
 
@@ -143,4 +158,13 @@ function! MyFunc_MoveGUIWindowPos(dx, dy)
   endif
     execute "winpos " . l:nx . " " . l:ny
 endfunction
+
+"highlight! Cursor guifg=red guibg=blue gui=bold
+
+" Following Cursor highlight settings do not work..
+"highlight TermCursor ctermfg=white ctermbg=blue cterm=bold guifg=white guibg=blue gui=bold
+"highlight TermCursorNC ctermfg=white ctermbg=blue cterm=bold guifg=white guibg=blue gui=bold
+"highlight Cursor ctermfg=white ctermbg=blue cterm=bold guifg=white guibg=blue gui=bold
+"highlight lCursor ctermfg=white ctermbg=blue cterm=bold guifg=white guibg=blue gui=bold
+"highlight CursorIM ctermfg=white ctermbg=blue cterm=bold guifg=white guibg=blue gui=bold
 
