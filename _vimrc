@@ -336,6 +336,9 @@ call dein#add('Shougo/neocomplete.vim')
 call dein#add('Shougo/neobundle.vim')
 call dein#add('vim-jp/vital.vim')
 call dein#add('Shougo/unite.vim')
+if has('nvim')
+  call dein#add('Shougo/denite.nvim')
+endif
 "call dein#add('vim-ctrlspace/vim-ctrlspace')
 call dein#add('Shougo/neomru.vim')
 call dein#add('Shougo/vimfiler')
@@ -390,6 +393,7 @@ call dein#add('thinca/vim-unite-history')
 call dein#add('koron/cmigemo')
 call dein#add('haya14busa/vim-migemo')
 call dein#end()
+call dein#save_state()
 "helptag
 execute 'helptags '.expand($ROOT_DEIN.'/repos/github.com/vim-jp/vimdoc-ja/doc')
 filetype plugin indent on
@@ -817,6 +821,30 @@ let g:unite_source_grep_max_candidates = 200
 let g:unite_enable_ignore_case = 1
 let g:unite_enable_smart_case = 1
 """""""""""""""""""""""""""""""""""""""""""""""""""
+"denite settings
+"""""""""""""""""""""""""""""""""""""""""""""""""""
+if has('nvim')
+  if has('win32') || has('win64')
+    let g:python3_host_prog = 'C:\\Python36\\python.exe'
+  else
+  endif
+  call denite#custom#option('default', {'highlight_mode_normal': 'CursorLine'})
+  nnoremap <silent><C-L><C-R> :<C-u>Denite -mode=normal file_mru<CR>
+  nnoremap <silent><C-L><C-O> :<C-u>Denite outline<CR>
+  call denite#custom#map(
+         \ 'insert',
+         \ '<C-j>',
+         \ '<denite:move_to_next_line>',
+         \ 'noremap'
+         \)
+  call denite#custom#map(
+         \ 'insert',
+         \ '<C-k>',
+         \ '<denite:move_to_previous_line>',
+         \ 'noremap'
+         \)
+endif
+"""""""""""""""""""""""""""""""""""""""""""""""""""
 "eskk.vim Settings
 """""""""""""""""""""""""""""""""""""""""""""""""""
 if has('win32') || has('win64')
@@ -1078,9 +1106,14 @@ endfunc
 
 "With ":highlight" command, check the current colorscheme setting.
 set background=dark
+"set background=#1E1E1E
 hi IndentGuidesOdd ctermbg=5
 hi IndentGuidesEven ctermbg=61
-hi Normal ctermbg=NONE
+"if has('nvim')
+"    "hi Normal ctermbg=#1E1E1E
+"    "hi Normal guibg=#1E1E1E
+"else
+"endif
 "EasyMotion Color Scheme
 hi EasyMotionTarget cterm=bold ctermbg=yellow ctermfg=red
                     
@@ -1088,8 +1121,8 @@ hi EasyMotionTarget cterm=bold ctermbg=yellow ctermfg=red
 hi Pmenu ctermbg=black ctermfg=green cterm=bold
 hi PmenuSel ctermbg=darkcyan ctermfg=white cterm=bold
 hi WarningMsg term=standout ctermfg=LightRed guifg=green
-hi Search ctermbg=Yellow ctermfg=Red
 hi CursorLine ctermbg=Black
+hi Search ctermbg=Yellow ctermfg=Red
 hi LineNr ctermfg=LightRed
 hi CursorLineNr ctermfg=Green ctermbg=Black
 hi MatchParen cterm=underline,bold,reverse guisp=Red ctermbg=NONE ctermfg=NONE

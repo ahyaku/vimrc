@@ -1,7 +1,7 @@
 "set encoding=euc-jp
 "Auto encode detection.
 "set fileencodings=utf-8,iso-2022jp,cp932,sjis,euc-jp
-set fileencodings=utf-8,iso-2022jp,sjis,euc-jp
+set fileencodings=utf-8,sjis,iso-2022jp,euc-jp
 set fileformats=unix,dos
 "Change Tab Switch
 if v:version>=700
@@ -101,8 +101,10 @@ if has('multi_byte_ime')
   "highlight Cursor guifg=NONE guibg=#006400
   "highlight Cursor guifg=white guibg=DarkGreen
   "highlight Cursor guifg=#6060af gui=bold,reverse
-  highlight Cursor guifg=white guibg=#6060af gui=bold
-  highlight CursorIM guifg=white guibg=Red
+  "highlight Cursor guifg=white guibg=#6060af gui=bold
+  "highlight CursorIM guifg=white guibg=Red
+  highlight Cursor guifg=white guibg=#6060ff gui=bold
+  highlight CursorIM guifg=white guibg=#ff6060
 else
   if has('nvim')
     " Following Cursor highlight settings do not work..
@@ -134,7 +136,25 @@ let g:lightline = {
 hi LineNr guifg=LightRed
 hi CursorLineNr guifg=Green guibg=Black
 hi MatchParen gui=underline,bold,reverse guisp=Red guibg=NONE guifg=NONE
-hi Visual guibg=darkcyan
+hi Visual guibg=#1E5E1E
+
+hi CursorLine guibg = #1E1E4E
+hi Cursor guifg=white guibg=#6060ff gui=bold
+"hi nCursor guifg=white guibg=#6060ff gui=bold
+"hi iCursor guifg=white guibg=#6060ff gui=bold
+hi lCursor guifg=white guibg=#6060ff gui=bold
+hi CursorIM guifg=white guibg=#ff6060
+
+"if has('nvim')
+"  "hi Normal guibg=NONE
+"  "hi Normal ctermbg=BLACK
+"  "hi Normal guibg=#1E1E4E
+"  "set guicursor=n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20
+"  "set guicursor=n-v-c-sm:block-Cursor/lCursor,i-ci-ve:ver25-Cursor/lCursor,r-cr-o:hor20-Cursor/lCursor
+"  set guicursor=n-v-c-sm:block-Cursor/lCursor,i-ci-ve:ver25-Cursor/lCursor,r-cr-o:hor20-Cursor/lCursor
+"else
+"  "hi Normal guibg=NONE
+"endif
 
 "Move GUI Window Position
 nnoremap <silent><C-S-Left> :<C-u>call MyFunc_MoveGUIWindowPos(-30, 0)<CR>
