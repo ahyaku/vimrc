@@ -289,12 +289,13 @@ else
   set runtimepath+=~/.cabal/bin/
   set runtimepath+=~/.cabal/
   let $PATH_CTAGS = "/usr/bin/ctags"
-  let $ROOT_DEIN=expand($HOME).'/.vim/dein'
+  let $ROOT_DEIN=$HOME.'/.vim/dein'
 endif
-let $PATH_DEIN=expand($ROOT_DEIN).'/repos/github.com/Shougo/dein.vim'
+let $PATH_DEIN=$ROOT_DEIN.'/repos/github.com/Shougo/dein.vim'
+let $ROOT_PLUGIN=$ROOT_DEIN.'/repos/github.com'
 set runtimepath+=$PATH_CTAGS
 set runtimepath+=$PATH_DEIN
-set runtimepath+=expand($ROOT_DEIN).'/repos/github.com'
+set runtimepath+=$ROOT_PLUGIN
 
 "Status-Checking function to switch neocomplete (which requires lua) / neobundle.
 function! s:meet_neocomplete_requirements()
