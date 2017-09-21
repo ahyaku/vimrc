@@ -278,10 +278,10 @@ nnoremap <C-T><C-N>
 filetype plugin indent off
 set runtimepath&
 if has('win32') || has('win64')
-  let $VIM_HOME="C:/vim74-kaoriya-win64"
-  set runtimepath^=$VIM_HOME
-  set runtimepath^=$VIM_HOME/.vim
-  set runtimepath^=$VIM_HOME/plugins/vimproc
+  let $VIM_PATH=substitute(expand($VIM), '\\', '/', 'g')
+  set runtimepath^=$VIM_PATH
+  set runtimepath^=$VIM_PATH/.vim
+  set runtimepath^=$VIM_PATH/plugins/vimproc
   let $PATH_CTAGS = "C:/ctags58"
   let $ROOT_DEIN=substitute(expand($VIM), "\\", "/", "g").'/.vim/dein'
 else
