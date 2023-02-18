@@ -100,6 +100,21 @@ augroup Tabstop
   autocmd FileType sh,vim,javascript,json,html setlocal tabstop=2 softtabstop=0 shiftwidth=2
   autocmd FileType hs setlocal tabstop=4 softtabstop=0 shiftwidth=4
 augroup END
+augroup IME-OFF
+  autocmd!
+  if has('win32') || has('win64')
+    if has('nvim')
+        "autocmd InsertEnter * silent call chansend(v:stderr, "\e[<r")
+        "autocmd InsertLeave * silent call chansend(v:stderr, "\e[<s\e[<0t")
+        "autocmd VimLeave * silent call chansend(v:stderr, "\e[<0t\e[<s")
+        " ime off
+        if executable('zenhan')
+          autocmd InsertLeave * :call system('zenhan 0')
+          autocmd CmdlineLeave * :call system('zenhan 0')
+        endif
+    endif
+  endif
+augroup END
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "lightline Settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -282,6 +297,10 @@ if has('win32') || has('win64')
   set runtimepath^=$VIM_PATH
   set runtimepath^=$VIM_PATH/.vim
   set runtimepath^=$VIM_PATH/plugins/vimproc
+  if has('nvim') "Need this to load nvim_gui_shim.vim for nvim-qt font command Guifont.
+    "$NVIM_QT_RUNTIME_PATH is not available.. why?
+    set runtimepath^=$VIM_PATH/../nvim-qt/runtime
+  endif
   let $PATH_CTAGS = "C:/ctags58"
   let $ROOT_DEIN=substitute(expand($VIM), "\\", "/", "g").'/.vim/dein'
 else
