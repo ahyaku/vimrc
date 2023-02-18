@@ -70,7 +70,8 @@ syntax on
 "Font Size
 if has('win32') || has('win64')
   if has('nvim')
-    Guifont! Consolas:h11
+    "Guifont! Consolas:h11
+    Guifont! Cica:h14
   else
     set guifont=MS_Gothic:h10:cSHIFTJIS
   endif
@@ -79,7 +80,7 @@ endif
 set guioptions-=T
 set guioptions-=m
 
-if has(!'nvim')
+if !has('nvim')
   " Toggle to display Menu/Tool bars or NOT.
   noremap <silent> <F2> : if &guioptions=~# 'T' <Bar>
                               \set guioptions-=T <Bar>
